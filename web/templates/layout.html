@@ -45,7 +45,20 @@
                             <li class="nav-item"><a href="#" class=" nav-link">About</a></li>
                             <li class="nav-item last"><a href="#" class=" nav-link">Contact</a></li>
                         </ul>
-                        <a class="ms-3 btn btn-primary" href="/login">Login</a>
+                        {% if current_user.is_authenticated %}
+                         <div class="dropdown account-menu">
+                                <a class="dropdown-toggle btn btn-secondary text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    My Account
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="#">Profile Settings</a></li>
+                                    <li><a class="dropdown-item" href="#">Change Password</a></li>
+                                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                                </ul>
+                            </div>
+                        {% else %}
+                            <a class="ms-3 btn btn-primary" href="/login">Login</a>
+                        {% endif %}
                     </div>
                 </div>
             </nav>

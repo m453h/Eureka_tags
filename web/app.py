@@ -1,16 +1,16 @@
-from flask import Flask
+from web import app
 from web.authentication.authentication import authentication_pages
 from web.common import common_pages
 from web.user.dashboard import dashboard_pages
 from web.user.posts import posts_pages
+from models import user, post
+from web import db
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'Change this for security'
 app.register_blueprint(authentication_pages)
 app.register_blueprint(dashboard_pages)
 app.register_blueprint(common_pages)
 app.register_blueprint(posts_pages)
-
+db.create_all()
 
 if __name__ == "__main__":
     """ Main Function """
