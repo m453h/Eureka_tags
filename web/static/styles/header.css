@@ -1,0 +1,163 @@
+div.header{
+        background-color:#FFF;
+        height:100px;
+}
+
+div.intro{
+        height:500px;
+        padding-top:150px;
+        background-color: #000;
+        background-image: url('../images/hero-1-bg.png')
+}
+
+img.logo{
+        height: 60px;
+        margin-top: 22px;
+}
+
+a.btn-custom{
+        text-decoration: none;
+        display: inline-block;
+        padding:10px 18px;
+        font-weight: bolder;
+        color:#000;
+        cursor: pointer;
+        border-radius: 0.25rem;
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+a.btn-login{
+        background-color: #f6e58d;
+}
+
+a.btn-create{
+        background-color: #08ff8c;
+        font-weight: bolder;
+}
+
+a.btn-learn{
+        background-color: #ff7979;
+        font-weight: bolder;
+}
+
+a.btn-login:focus, a.btn-login:active, a.btn-login:hover{
+        background-color: #bdaf6c;
+        font-weight: bolder;
+}
+
+a.btn-create:focus, a.btn-create:hover{
+        background-color: #0ac56e;
+        font-weight: bolder;
+}
+
+a.btn-learn:focus, a.btn-learn:hover{
+        background-color: #c45a5a;
+        font-weight: bolder;
+}
+
+div.feature{
+        text-align:left;
+}
+
+div.feature a {
+        font-size: 1.3em;
+        text-decoration: none;
+}
+
+div.feature h4 {
+        font-size: 2.0em;
+        margin-bottom:20px;
+        margin-top:30px;
+}
+div.feature i.icon{
+        font-size:3em;
+        color: #091E42;
+        background: #DEEBFF;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 100px;
+        vertical-align: middle;
+}
+div.features {
+        padding-top: 100px;
+        padding-bottom: 100px;
+}
+div.footer{
+    background: #2A56F1;
+    padding:30px 0;
+}
+div.footer p{
+    padding:20px 0 0 0;
+}
+
+div.dashboard-item{
+    height:160px;
+    background: #ffffff;
+    -webkit-box-shadow: 0 0.5rem 1rem rgba(73,80,87,0.25) !important;
+    box-shadow: 0 0.5rem 1rem rgba(73,80,87,0.25) !important;
+    margin-bottom:20px;
+    text-align: center;
+}
+.dashboard-item a{
+    text-decoration: none;
+    color:#427CAA;
+    font-weight:bolder;
+}
+.dashboard-item a:hover{
+    color:#2C9EE0;
+    text-decoration:underline;
+}
+.dashboard-item img{
+    width:80px;
+    margin-top:25px;
+}
+h2.title, h3.title {
+    font-weight: 400;
+    font-size: 1.6em;
+    line-height: 18px;
+    margin: 20px 0 22px;
+    letter-spacing: -1px;
+    border-left: 5px solid #078CFC;
+    padding-left: 10px;
+}
+
+.search{
+    position: relative;
+    box-shadow: 0 0 40px rgba(51, 51, 51, .1);
+}
+
+.search input{
+    height: 60px;
+    text-indent: 25px;
+    border: 2px solid #2e63d9;
+}
+
+.search input:focus{
+    box-shadow: none;
+    border: 2px solid blue;
+}
+
+.search .fa-search{
+    position: absolute;
+    top: 20px;
+    left: 16px;
+}
+
+.search button{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 50px;
+    width: 110px;
+    background: blue;
+}
+
+div.welcome-banner{
+    background: #F2F1F4;
+    height: 82px;
+    padding-top: 18px;
+    border-bottom:1px solid #e1e1e1;
+}
+
