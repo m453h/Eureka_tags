@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="bg-white">
+    <div class="welcome-banner">
+        <div class="container">
+            <h2 class="title"><span>Welcome, Michael</span></h2>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row height d-flex justify-content-center align-items-center mt-5 mb-5">
+
+          <div class="col-md-8">
+
+            <div class="search">
+              <i class="fa fa-search"></i>
+              <input type="text" class="form-control" placeholder="Search for something...">
+              <button class="btn btn-primary">Search</button>
+            </div>
+
+          </div>
+
+        </div>
+
+    </div>
+
+    <div class="container" style="min-height:700px">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+            <div class="container-lg mt-4 align-content-end">
+                <div class="row justify-content-sm-start  align-items-center">
+                    <div class="col-md-4 align-content-center">
+                        <div class="dashboard-item">
+                            <a href="/create-post/">
+                                <img src="../static/images/icon-create-post.png" />
+                                <br/>
+                                 Create a Post
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 align-content-center">
+                        <div class="dashboard-item">
+                            <a href="#">
+                                <img src="../static/images/icon-tag.png" />
+                                <br/>
+                                Manage Tags
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4  align-content-center">
+                        <div class="dashboard-item">
+                            <a href="#">
+                                <img src="../static/images/icon-settings.png" />
+                                <br/>
+                                Account Settings
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4 align-content-center">
+                        <div class="dashboard-item">
+                            <a href="#">
+                                <img src="../static/images/icon-help.png" />
+                                <br/>
+                                Help
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

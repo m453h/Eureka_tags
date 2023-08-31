@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block title %}Authentication{% endblock %}
+{% block header %}
+{% endblock %}
+{% block content %}
+  <section class="vh-100">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6 text-black">
+
+        <div class="px-5 ms-xl-4">
+            <a href="{{ url_for('authentication_pages.login') }}"><img src="../static/images/app_logo_alt.png" alt="Eureka Tags" class="logo"/></a>
+        </div>
+
+        <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+            {% block form %}
+            {% endblock %}
+        </div>
+
+      </div>
+      <div class="col-sm-6 px-0 d-none d-sm-block">
+        <img src="../static/images/login.jpg"
+          alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <script>
+    $( document ).ready(function() {
+            var simplemde = new SimpleMDE({ element: document.getElementById("editor") });
+    });
+    </script>
+{% endblock %}
+{% block title %}Create a Post{% endblock %}
+{% block content %}
+<div class="bg-white">
+    <div class="welcome-banner">
+        <div class="container">
+            <h2 class="title"><span>Create a new Post</span></h2>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row height d-flex justify-content-center align-items-center mt-5 mb-5">
+
+          <div class="col-md-12">
+                <form>
+                      <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="title" aria-describedby="title">
+                      </div>
+                    <div class="mb-3">
+                        <textarea id="editor">
+                        </textarea>
+                    </div>
+
+                      <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+
+          </div>
+
+        </div>
+
+    </div>
+
+
+{% endblock %}

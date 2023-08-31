@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% block head %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Eureka Tags | {% block title %}{% endblock %}</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+                crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/c3d9459517.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <link href="../static/styles/main.css" rel="stylesheet">
+        <link href="../static/styles/header.css" rel="stylesheet">
+        <link rel="icon" href="../static/images/icon.png" />
+    {% endblock %}
+</head>
+
+<body>
+{% block body %}
+    {% block header %}
+        <div class="header">
+            <div class="container-lg">
+                <a href="#">
+                </a>
+            </div>
+            <nav id="my-navigation-bar" class="navbar navbar-expand-lg navbar-light border-bottom bg-white">
+                <div class="container-lg">
+                    <a href="/" class="navbar-brand"><img src="../static/images/app_logo_alt.png" alt="Eureka Tags" class="logo"/></a>
+                    <button class="navbar-toggler" type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#main-nav"
+                            aria-controls="main-nav"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item current first"><a href="/" class=" nav-link">Home</a></li>
+                            <li class="nav-item"><a href="#" class=" nav-link">About</a></li>
+                            <li class="nav-item last"><a href="#" class=" nav-link">Contact</a></li>
+                        </ul>
+                        <a class="ms-3 btn btn-primary" href="/login">Login</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    {% endblock %}
+
+    {% block content %}
+
+    {% endblock %}
+
+    {% block footer %}
+        <div class="footer">
+            <div class="container-lg">
+               <p class="text-light"> &copy; 2023 Eureka Tags</p>
+            </div>
+        </div>
+    {% endblock %}
+
+        </body>
+{% endblock %}
+</html>

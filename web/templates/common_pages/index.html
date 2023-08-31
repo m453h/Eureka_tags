@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+   <div class="intro text-center mb-5">
+        <div class="container">
+            <h1 class="text-light mb-5 fw-bolder">An easy way to archive solutions to common problems</h1>
+            <div class="container mb-5">
+                <a class="btn-custom btn-create shadow me-2 mt-3" href="/register">Create an account</a>
+                <a class="btn-custom btn-login shadow me-2 mt-3" href="/login">Login with your account</a>
+                <a class="btn-custom btn-learn shadow mt-3">Learn More</a>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="text-center mt-5 features">
+        <div class="container-lg">
+            <div class="row text-center">
+                <div class="col-lg-4 feature">
+                    <i class="fa-regular fa-flag icon"></i>
+                    <h4>Get started </h4>
+                    <p>
+                        Suspendisse eu ipsum quis magna sodales efficitur. Suspendisse potenti.
+                        Cras posuere facilisis condimentum. In et quam justo. Cras auctor leo ac ante volutpat,
+                        eu gravida neque rhoncus. Quisque ut sem nibh.
+                    </p>
+                    <a href='#'>Read More <i class="fa-solid fa-chevron-right"></i></a>
+                </div>
+                <div class="col-lg-4 feature">
+                    <i class="fa-solid fa-question icon"></i>
+                    <h4>Why use Eureka Tags</h4>
+                    <p>Suspendisse eu ipsum quis magna sodales efficitur. Suspendisse potenti.
+                        Cras posuere facilisis condimentum. In et quam justo. Cras auctor leo ac ante volutpat,
+                        eu gravida neque rhoncus. Quisque ut sem nibh.</p>
+                    <a href='#'>Read More <i class="fa-solid fa-chevron-right"></i></a>
+                </div>
+
+                <div class="col-lg-4 feature">
+                    <i class="fa-brands fa-github icon"></i>
+                    <h4>How to contribute</h4>
+                    <p>Suspendisse eu ipsum quis magna sodales efficitur. Suspendisse potenti.
+                        Cras posuere facilisis condimentum. In et quam justo. Cras auctor leo ac ante volutpat,
+                        eu gravida neque rhoncus. Quisque ut sem nibh.</p>
+                    <a href='#'>Read More <i class="fa-solid fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
