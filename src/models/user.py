@@ -1,5 +1,5 @@
-from web import db, login_manager
-from models import post
+from src import db, login_manager
+from src.models import post
 from datetime import datetime
 from flask_login import UserMixin
 
@@ -18,6 +18,7 @@ class User(db.Model, UserMixin):
     date_created = db.Column(db.DateTime(timezone=True), default=datetime.utcnow, nullable=False)
     date_updated = db.Column(db.DateTime(timezone=True), onupdate=datetime.utcnow)
     posts = db.relationship('Post', backref='author', lazy=True)
+    role_id = db.Column(db.Integer, db.ForeignKey('role.id'), nullable=False)
 
     def __repr__(self):
         return f"User('{self.email}', '{self.full_name}', '{self.account_status}')"

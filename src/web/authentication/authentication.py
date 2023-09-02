@@ -2,9 +2,9 @@
 """ Starts a Flash Web Application """
 from flask import render_template, Blueprint, flash, redirect, url_for
 
-from models.user import User
-from web import db, bcrypt
-from web.authentication.forms import RegistrationForm, LoginForm
+from src.models.user import User
+from src import db, bcrypt
+from src.web.authentication.forms import RegistrationForm, LoginForm
 from flask_login import login_user, current_user, logout_user
 
 authentication_pages = Blueprint('authentication_pages', __name__,
@@ -39,6 +39,7 @@ def register():
         user = User(email=form.email.data,
                     full_name=form.full_name.data,
                     account_status="A",
+                    role_id="1",
                     password=hashed_password)
         db.session.add(user)
         db.session.commit()
