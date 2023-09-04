@@ -10,7 +10,7 @@ app.register_blueprint(authentication_pages)
 app.register_blueprint(dashboard_pages)
 app.register_blueprint(common_pages)
 app.register_blueprint(posts_pages)
-db.create_all()
+
 
 if __name__ == "__main__":
     """ Main Function """

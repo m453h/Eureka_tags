@@ -1,6 +1,10 @@
 div.header{
         background-color:#FFF;
-        height:100px;
+}
+
+div.top-bar {
+    background: #048cfc;
+    height: 30px
 }
 
 div.intro{
@@ -12,7 +16,6 @@ div.intro{
 
 img.logo{
         height: 60px;
-        margin-top: 22px;
 }
 
 a.btn-custom{
@@ -158,6 +161,144 @@ div.welcome-banner{
     background: #F2F1F4;
     height: 82px;
     padding-top: 18px;
+    margin-top:-13px;
     border-bottom:1px solid #e1e1e1;
 }
 
+div.bg-gray{
+    background-color:#F3F2F0;
+}
+
+img.profile-icon{
+    width:80px;
+}
+
+.profile-details h3{
+    font-size: 1.2em;
+}
+
+table.full-width{
+    width:100%;
+    font-size:0.9em;
+}
+table.full-width tr {
+    cursor:pointer;
+}
+table.full-width tr:hover{
+    background:#EEE;
+}
+table.full-width td{
+    padding:5px 10px;
+}
+span.bold{
+    font-weight:bolder;
+}
+
+span.separator{
+    border-top:1px solid #E8E8E8;
+    display:block;
+}
+#profile h4{
+    font-size:1.2em;
+}
+span.icon-spacer-right {
+    padding-right:10px;
+}
+
+i.icon-orange{
+    color:orange;
+    background: -webkit-gradient(linear, left top, left bottom, from(#F8C77E), to(#E7A33E));
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+#profile .badge {
+    font-size:0.9em;
+    margin-bottom:10px;
+}
+
+div.create-post{
+    background:#FFF;
+    padding:30px;
+    border-radius: 35px;
+    padding-left: 1.6rem;
+    color:#666;
+    font-weight:bolder;
+}
+div.create-post a {
+    text-decoration:none;
+    color:#666;
+}
+div.simply-hidden {
+    display:none;
+}
+
+div.meta {
+    margin: 8px 0 10px 0
+}
+
+ul.post-tags {
+    padding: 0;
+    margin: 0;
+    clear: both
+}
+
+ul.post-tags li {
+    list-style: none;
+    display: inline-block;
+    padding-left: 25px;
+    margin: 0 16px 10px 0px;
+    color: #888888
+}
+
+ul.post-tags li a {
+    color: #888888;
+    text-decoration: none;
+    margin-top: 13px
+}
+
+ul.post-tags li.date {
+    background: url('../images/meta.png') 0% -4% no-repeat
+}
+
+ul.post-tags li.author {
+    background: url('../images/meta.png') 0% 28% no-repeat
+}
+
+ul.post-tags li.tags {
+    background: url('../images/meta.png') 0% 58% no-repeat
+}
+
+div.information a.information-header{
+    font-size:0.9em;
+    text-decoration:none;
+}
+
+div.information {
+    padding:30px 25px;
+}
+
+ul.side-menu{
+    padding:0;
+    margin:0;
+    list-style:none;
+}
+
+ul.side-menu li{
+    margin-bottom:10px;
+    padding:10px 0;
+        border-bottom:1px solid #eee;
+}
+
+ul.side-menu li a{
+    text-decoration:none;
+    color:#666;
+    font-size:1.0em;
+}
+
+ul.side-menu li a:hover{
+    color:#000;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    transition: 0.3s;
+}

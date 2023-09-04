@@ -1,80 +1,117 @@
 {% extends "layout.html" %}
 {% block title %}Home{% endblock %}
 {% block content %}
-<div class="bg-white">
-    <div class="welcome-banner">
-        <div class="container">
-            <h2 class="title"><span>Welcome, {{ current_user.full_name }}</span></h2>
-        </div>
-    </div>
+<div class="bg-gray">
+
     <div class="container">
-        <div class="row height d-flex justify-content-center align-items-center mt-5 mb-5">
-
-          <div class="col-md-8">
-
-            <div class="search">
-              <i class="fa fa-search"></i>
-              <input type="text" class="form-control" placeholder="Search for something...">
-              <button class="btn btn-primary">Search</button>
-            </div>
-
-          </div>
-
-        </div>
-
-    </div>
-
-    <div class="container" style="min-height:700px">
         <div class="row">
-            <div class="col-lg-12 col-md-12">
-            <div class="container-lg mt-4 align-content-end">
-                <div class="row justify-content-sm-start  align-items-center">
-                    <div class="col-md-4 align-content-center">
-                        <div class="dashboard-item">
-                            <a href="/create-post/">
-                                <img src="../static/images/icon-create-post.png" />
-                                <br/>
-                                 Create a Post
-                            </a>
-                        </div>
+            <div class="col-lg-3 bg-white mt-4 shadow-sm rounded mb-5" id="profile">
+                <div class="container-lg mt-4 align-content-end">
+                    <div class="text-center profile-details">
+                        <img src="../static/images/user_icon.png" class="profile-icon" />
+                        <h3 class="mt-3 mb-3">{{ current_user.full_name }}</h3>
                     </div>
+                    <span class="separator mb-3"></span>
 
-                    <div class="col-md-4 align-content-center">
-                        <div class="dashboard-item">
-                            <a href="#">
-                                <img src="../static/images/icon-tag.png" />
-                                <br/>
-                                Manage Tags
-                            </a>
-                        </div>
+                    <table class="full-width mb-3">
+                        <tr>
+                            <td><span class="bold">Total Posts</span></td>
+                            <td class="text-end">0</td>
+                        </tr>
+                        <tr>
+                            <td><span class="bold">Total Tags</span></td>
+                            <td class="text-end">0</td>
+                        </tr>
+                    </table>
 
-                    </div>
+                    <span class="separator mb-3"></span>
+                    <h4><span class="icon-spacer-right"><i class="fa-solid fa-tags icon-orange"></i></span>My Tags</h4>
 
-                    <div class="col-md-4  align-content-center">
-                        <div class="dashboard-item">
-                            <a href="#">
-                                <img src="../static/images/icon-settings.png" />
-                                <br/>
-                                Account Settings
-                            </a>
-                        </div>
+                    <span class="badge rounded-pill bg-secondary">Python</span>
+                    <span class="badge rounded-pill bg-secondary">MySQL</span>
+                    <span class="badge rounded-pill bg-secondary">Puppet</span>
+                    <span class="badge rounded-pill bg-secondary">C</span>
+                    <span class="badge rounded-pill bg-secondary">jQuery</span>
 
-                    </div>
-
-                    <div class="col-md-4 align-content-center">
-                        <div class="dashboard-item">
-                            <a href="#">
-                                <img src="../static/images/icon-help.png" />
-                                <br/>
-                                Help
-                            </a>
-                        </div>
-
-                    </div>
-
+                    <span class="separator mt-3 mb-3"></span>
+                     <ul class="side-menu">
+                         <li><a href="#"><span class="icon-spacer-right"><i class="fa-solid fa-signs-post"></i></span>Manage Posts</a></li>
+                        <li><a href="#"><span class="icon-spacer-right"><i class="fa-solid fa-tags"></i></span>Manage Tags</a></li>
+                        <li><a href="#"><span class="icon-spacer-right"><i class="fa-solid fa-screwdriver-wrench"></i></span>Account Settings</a></li>
+                        <li><a href="#"><span class="icon-spacer-right"><i class="fa-solid fa-circle-question"></i></span>Help</a></li>
+                     </ul>
                 </div>
             </div>
+
+            <div class="col-lg-9 col-md-8 mb-5" style="min-height:700px;">
+                <div class="container-lg mt-4 align-content-end" id="create-post">
+                      <div id="dialog-content" style="display:none;" class="col-md-6">
+                            <form method="POST", action="">
+                                 {{ form.hidden_tag() }}
+                                <div class="form-outline mb-4">
+                                    {{ form.title.label(class="form-label") }}
+                                      {% if form.title.errors %}
+                                            {{ form.title(class="form-control form-control-lg is-invalid") }}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.title.errors %}
+                                                    <span>{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                      {% else %}
+                                            {{ form.title(class="form-control form-control-lg") }}
+                                      {% endif %}
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                      {% if form.content.errors %}
+                                            {{ form.content(class="is-invalid", id="editor") }}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.content.errors %}
+                                                    <span>{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                      {% else %}
+                                            {{ form.content(id="editor") }}
+                                      {% endif %}
+                                </div>
+                            {{ form.submit(class="btn btn-primary me-3") }}
+                            </form>
+                      </div>
+                            <div class="create-post shadow-sm"> <a href="#create-post" data-fancybox data-src="#dialog-content" class="create-post">Create a Post ... </a></div>
+                </div>
+
+                <div class="container-lg mt-4 align-content-end">
+
+                     <div class="shadow-sm bg-white rounded information mb-3">
+                         <div class="container">
+                            <h3><a href="#" class="information-header">How to create a virtualenv in Python 3</a></h3>
+                           <div class="col-lg-12 meta mt-3">
+                                <ul class="post-tags">
+                                    <li class="date">26 <a href="/blog/archives/september/2015">September 2015</a></li>
+                                    <li class="author">by <a href="#" title="Posts by admin" rel="author">admin</a></li>
+                                    <li class="tags"><a href="/blog/topic/web" rel="category tag">web</a></li>
+                                </ul>
+
+                           </div>
+                             <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
+                                 eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                                 Nemo enim ipsam voluptatem quia
+                                 voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                             <a href="#" class="link-primary link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">Read more >></a>
+                         </div>
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+
+
         </div>
+
+
 
         </div>
     </div>

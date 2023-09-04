@@ -16,21 +16,37 @@
         <link href="../static/styles/main.css" rel="stylesheet">
         <link href="../static/styles/header.css" rel="stylesheet">
         <link rel="icon" href="../static/images/icon.png" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
+        <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+        <script>
+            $( document ).ready(function() {
+                    var simplemde = new SimpleMDE({ element: document.getElementById("editor") });
+            });
+        </script>
+        <script>
+            $( document ).ready(function() {
+
+             Fancybox.bind('[data-fancybox]', {
+        // Custom options for all galleries
+      });
+
+              /*  $("a.create-post").click(function(){
+                       $(".simply-hidden").show(1000);
+                });
+
+                $("span.cancel-post").click(function(){
+                       $(".simply-hidden").hide(1000);
+                });*/
+             });
+         </script>
     {% endblock %}
 </head>
 
 <body>
 {% block body %}
     {% block header %}
-<div class="top-bar">
-                <div class="container-lg">
-                    <div class="row">
-                        <div class="col-12 text-white">
-                                                            <p class="pt-1"><i class="fa-solid fa-user me-2"></i> Elisha Richard Mwambembe (<a href="/logout" class="text-white">Logout</a>)</p>
-                                                    </div>
-                    </div>
-                </div>
-            </div>
         <div class="header">
             <div class="container-lg">
                 <a href="#">
