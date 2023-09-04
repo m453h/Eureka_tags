@@ -1,10 +1,18 @@
 div.header{
         background-color:#FFF;
 }
-
-div.top-bar {
-    background: #048cfc;
-    height: 30px
+div.search{
+    width:100%;
+}
+div.search input{
+    background:#EDF3F8;
+    border:0 !important;
+    height:45px;
+    background-image:url('../images/search_icon.png');
+    background-repeat:no-repeat;
+    background-position: 15px 50%;
+    padding-left: 42px;
+    border-radius: 35px;
 }
 
 div.intro{
@@ -126,36 +134,6 @@ h2.title, h3.title {
     padding-left: 10px;
 }
 
-.search{
-    position: relative;
-    box-shadow: 0 0 40px rgba(51, 51, 51, .1);
-}
-
-.search input{
-    height: 60px;
-    text-indent: 25px;
-    border: 2px solid #2e63d9;
-}
-
-.search input:focus{
-    box-shadow: none;
-    border: 2px solid blue;
-}
-
-.search .fa-search{
-    position: absolute;
-    top: 20px;
-    left: 16px;
-}
-
-.search button{
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    height: 50px;
-    width: 110px;
-    background: blue;
-}
 
 div.welcome-banner{
     background: #F2F1F4;
