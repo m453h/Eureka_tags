@@ -4,9 +4,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
     <script>
-    $( document ).ready(function() {
-            var simplemde = new SimpleMDE({ element: document.getElementById("editor") });
-    });
+        $( document ).ready(function() {
+                var simplemde = new SimpleMDE({ element: document.getElementById("editor") });
+        });
     </script>
 {% endblock %}
 {% block title %}Create a Post{% endblock %}
@@ -21,17 +21,35 @@
         <div class="row height d-flex justify-content-center align-items-center mt-5 mb-5">
 
           <div class="col-md-12">
-                <form>
-                      <div class="mb-3">
-                        <label for="title" class="form-label">Title</label>
-                        <input type="text" class="form-control" id="title" aria-describedby="title">
-                      </div>
-                    <div class="mb-3">
-                        <textarea id="editor">
-                        </textarea>
-                    </div>
+                <form method="POST", action="">
+                         {{ form.hidden_tag() }}
+                        <div class="form-outline mb-4">
+                            {{ form.title.label(class="form-label") }}
+                              {% if form.title.errors %}
+                                    {{ form.title(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.title.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                              {% else %}
+                                    {{ form.title(class="form-control form-control-lg") }}
+                              {% endif %}
+                        </div>
 
-                      <button type="submit" class="btn btn-primary">Save</button>
+                        <div class="form-outline mb-4">
+                              {% if form.content.errors %}
+                                    {{ form.content(class="is-invalid", id="editor") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.content.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                              {% else %}
+                                    {{ form.content(id="editor") }}
+                              {% endif %}
+                        </div>
+                    {{ form.submit(class="btn btn-primary") }}
                     </form>
 
           </div>
@@ -40,5 +58,5 @@
 
     </div>
 
-
+</div>
 {% endblock %}
