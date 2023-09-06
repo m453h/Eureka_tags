@@ -13,9 +13,9 @@
         <script src="https://kit.fontawesome.com/c3d9459517.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"
                 integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-        <link href="../static/styles/main.css" rel="stylesheet">
-        <link href="../static/styles/header.css" rel="stylesheet">
-        <link rel="icon" href="../static/images/icon.png" />
+        <link href="/static/styles/main.css" rel="stylesheet">
+        <link href="/static/styles/header.css" rel="stylesheet">
+        <link rel="icon" href="/static/images/icon.png" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
         <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
@@ -38,14 +38,13 @@
                            theme: 'bootstrap-5'
                     });
 
-                   $('a.create-post').click(function() {
-                        $('div.simply-hidden').show(1000);
+                   $('span.create-post').click(function() {
+                        $('div.simply-hidden').fadeIn();
                    });
 
                    $('span.cancel-create-post').click(function() {
-                        $('div.simply-hidden').hide(1000);
+                        $('div.simply-hidden').fadeOut();
                    });
-
             });
         </script>
 
@@ -58,7 +57,7 @@
         <div class="header">
             <nav id="my-navigation-bar" class="navbar navbar-expand-lg navbar-light border-bottom bg-white">
                 <div class="container-lg">
-                    <a href="/" class="navbar-brand"><img src="../static/images/app_logo_alt.png" alt="Eureka Tags" class="logo"/></a>
+                    <a href="/" class="navbar-brand"><img src="/static/images/app_logo_alt.png" alt="Eureka Tags" class="logo"/></a>
                     <div class="search">
                         <form action="/search" method="GET">
                              <input type="text" class="form-control" name="q" placeholder="Search for something...">

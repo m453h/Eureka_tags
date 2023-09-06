@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ Starts a Flash Web Application """
-from flask import render_template, Blueprint, flash, redirect, url_for
+from flask import render_template, Blueprint, flash, redirect, url_for, request
 from flask_login import current_user
 
 from src import db
@@ -29,3 +29,31 @@ def create():
         # return redirect(url_for('dashboard_pages.index'))
 
     return render_template('posts_pages/create.html', form=form)
+
+
+@posts_pages.route('/edit/<int:post_id>', strict_slashes=False, methods=['GET', 'POST'])
+def edit(post_id):
+    q = db.session.query(Post).filter(Post.id == post_id)
+    post = q.first()
+
+    if post:
+        form = PostForm(formdata=request.form, obj=post)
+
+        if request.method == 'POST' and form.validate():
+            post.title = form.title.data
+            post.content = form.content.data
+            post.is_public = form.is_public.data
+            post.tags.clear()
+            db.session.commit()
+
+            for tag in form.tags.data:
+                post.tags.append(tag)
+                print("Adding: " + tag.name)
+            db.session.commit()
+
+            flash('Your post has been updated!', 'success')
+            return redirect(url_for('dashboard_pages.index'))
+        form.tags.process_data(post.tags)
+        return render_template('posts_pages/edit.html', form=form)
+    else:
+        return 'Error loading #{id}'.format(id=id)
