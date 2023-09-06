@@ -43,9 +43,21 @@
                 </div>
             </div>
 
-            <div class="col-lg-9 col-md-8 mb-5" style="min-height:700px;">
+            <div class="col-lg-9 col-md-8 mb-5" style="min-height:1000px;">
+
                 <div class="container-lg mt-4 align-content-end" id="create-post">
-                      <div id="dialog-content" style="display:none;" class="col-md-6">
+                     {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                              {% for category, message in messages %}
+                                <div class="alert alert-{{ category }} mt-5">
+                                  {{ message }}
+                                </div>
+                              {% endfor %}
+                            {% endif %}
+                     {% endwith %}
+                    <div class="create-post shadow-sm">
+                        <a href="#create-post"  class="create-post">Create a Post ... </a>
+                        <div class="col-md-12 mt-5 simply-hidden">
                             <form method="POST", action="">
                                  {{ form.hidden_tag() }}
                                 <div class="form-outline mb-4">
@@ -62,6 +74,11 @@
                                       {% endif %}
                                 </div>
 
+                                <div class="form-check mb-3">
+                                    {{ form.is_public(class="form-check-input", id="flexCheckDefault") }}
+                                    {{ form.is_public.label(class="form-check-label", for="flexCheckDefault") }}
+                                </div>
+
                                 <div class="form-outline mb-4">
                                       {% if form.content.errors %}
                                             {{ form.content(class="is-invalid", id="editor") }}
@@ -74,10 +91,20 @@
                                             {{ form.content(id="editor") }}
                                       {% endif %}
                                 </div>
+
+                                <div class="form-outline mb-4">
+                                    {{ form.tags.label(class="form-label") }}
+                                    {{ form.tags(class="form-control form-control-lg awesome-select") }}
+                                </div>
+
                             {{ form.submit(class="btn btn-primary me-3") }}
+                                <span class="btn btn-danger cancel-create-post">Cancel</span>
                             </form>
                       </div>
-                            <div class="create-post shadow-sm"> <a href="#create-post" data-fancybox data-src="#dialog-content" class="create-post">Create a Post ... </a></div>
+
+
+                    </div>
+
                 </div>
 
                 <div class="container-lg mt-4 align-content-end">

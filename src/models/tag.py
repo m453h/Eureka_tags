@@ -9,4 +9,4 @@ class Tag(db.Model):
     date_updated = db.Column(db.DateTime(timezone=True), onupdate=datetime.utcnow)
 
     def __repr__(self):
-        return f"User('{self.id}', '{self.name}')"
+        return f"Tag('{self.id}', '{self.name}')"

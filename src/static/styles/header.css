@@ -200,12 +200,11 @@ div.create-post{
     padding:30px;
     border-radius: 35px;
     padding-left: 1.6rem;
-    color:#666;
-    font-weight:bolder;
 }
 div.create-post a {
     text-decoration:none;
     color:#666;
+    font-weight:bolder;
 }
 div.simply-hidden {
     display:none;
