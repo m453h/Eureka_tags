@@ -22,6 +22,7 @@
                     {% for tag in current_user.active_tags %}
                         <span class="badge rounded-pill bg-secondary"><a href="/dashboard/?t={{ tag.name }}" class="text-white text-decoration-none">{{tag.name}}</a></span>
                     {% endfor %}
+
                     <span class="separator mt-3 mb-3"></span>
                      <ul class="side-menu">
                          <li><a href="{{ url_for('dashboard_pages.index') }}"><span class="icon-spacer-right"><i class="fa-solid fa-signs-post"></i></span>Home</a></li>
