@@ -1,49 +1,164 @@
 {% extends "layout.html" %}
 {% block title %}Home{% endblock %}
 {% block content %}
-   <div class="intro text-center mb-5">
+   <div class="intro text-left mb-5">
         <div class="container">
-            <h1 class="text-light mb-5 fw-bolder">An easy way to archive solutions to common problems</h1>
-            <div class="container mb-5">
-                <a class="btn-custom btn-create shadow me-2 mt-3" href="/register">Create an account</a>
-                <a class="btn-custom btn-login shadow me-2 mt-3" href="/login">Login with your account</a>
-                <a class="btn-custom btn-learn shadow mt-3">Learn More</a>
+            <div class="row">
+                <div class="col-lg-5 mt-5">
+                    <h1 class="text-light mb-5 mt-5 fw-bolder">An easy way to archive solutions to common problems</h1>
+                    <div class="container mb-5">
+                        <a class="btn-custom btn-create shadow me-2 mt-3" href="/register">Create an account</a>
+                        <a class="btn-custom btn-learn shadow mt-3" href="#learn-more">Learn More <i class="fa-solid fa-circle-chevron-right ms-2"></i></a>
+                    </div>
+                </div>
+
+                 <div class="col-lg-7">
+                   <img src="/static/images/frame_generic_light.png" class="img-fluid"/>
+                </div>
             </div>
+
+
 
         </div>
     </div>
 
-    <div class="text-center mt-5 features">
+    <div class="text-center mt-5 features"  id="features">
         <div class="container-lg">
             <div class="row text-center">
-                <div class="col-lg-4 feature">
-                    <i class="fa-regular fa-flag icon"></i>
-                    <h4>Get started </h4>
-                    <p>
-                        Suspendisse eu ipsum quis magna sodales efficitur. Suspendisse potenti.
-                        Cras posuere facilisis condimentum. In et quam justo. Cras auctor leo ac ante volutpat,
-                        eu gravida neque rhoncus. Quisque ut sem nibh.
-                    </p>
-                    <a href='#'>Read More <i class="fa-solid fa-chevron-right"></i></a>
+                <h2 class="styled-header">FEATURES</h2>
+                <div class="col-lg-12 mb-3">
+                    <div class="divider"></div>
                 </div>
-                <div class="col-lg-4 feature">
-                    <i class="fa-solid fa-question icon"></i>
-                    <h4>Why use Eureka Tags</h4>
-                    <p>Suspendisse eu ipsum quis magna sodales efficitur. Suspendisse potenti.
-                        Cras posuere facilisis condimentum. In et quam justo. Cras auctor leo ac ante volutpat,
-                        eu gravida neque rhoncus. Quisque ut sem nibh.</p>
-                    <a href='#'>Read More <i class="fa-solid fa-chevron-right"></i></a>
+                <p class="quote  mb-5">"Here are some of the features that makes Eureka Tags unique"</p>
+                <div class="col-lg-12 text-center feature mb-5">
+                    <div class="row">
+                    <div class="col-lg-8">
+                        <img src="/static/images/organizer.png" class="img-fluid"/>
+                    </div>
+                    <div class="col-lg-4">
+                        <span class="feature-number" style="margin-top:25px;">1</span>
+                        <h4>Easy to use organizer</h4>
+                        <p>
+                            Eureka tags provides an easy to use scheme of organizing your documentation and code snippets.
+                            Similarly to a blog each snippet is treated as simply a post in which you can tag
+                            it under a topic (e.g. a Programming language etc.)
+                        </p>
+                    </div>
+                    </div>
                 </div>
 
-                <div class="col-lg-4 feature">
-                    <i class="fa-brands fa-github icon"></i>
-                    <h4>How to contribute</h4>
-                    <p>Suspendisse eu ipsum quis magna sodales efficitur. Suspendisse potenti.
-                        Cras posuere facilisis condimentum. In et quam justo. Cras auctor leo ac ante volutpat,
-                        eu gravida neque rhoncus. Quisque ut sem nibh.</p>
-                    <a href='#'>Read More <i class="fa-solid fa-chevron-right"></i></a>
+
+
+
+                <div class="col-lg-12 text-center feature mt-5">
+                    <div class="row">
+                        <div class="col-lg-4">
+                        <span class="feature-number" style="margin-top:70px">2</span>
+                        <h4>Fast searching capability</h4>
+                        <p>
+                            Eureka tags allows you to quickly search for a solution or code snippet you have saved in
+                            your knowledge repository. You don't have to scroll through thousands of texts to find what
+                            you are looking for, this feature truly increases your productivity.
+
+                        </p>
+                    </div>
+                    <div class="col-lg-8">
+                        <img src="/static/images/search.png" class="img-fluid"/>
+                    </div>
+
+                    </div>
+                </div>
+
+
+
+
+                <div class="col-lg-12 text-center feature mt-4">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <img src="/static/images/syntax.png" class="img-fluid"/>
+                        </div>
+                        <div class="col-lg-4">
+                            <span class="feature-number" style="margin-top:90px;">3</span>
+                            <h4>Syntax highlighting</h4>
+                            <p>
+                                Eureka tags supports syntax highlighting for code fragments you have written, through this
+                                you can quickly glance at the code snippet you are looking for instead of skimming through a whole
+                                post you created in the past.
+                            </p>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="mb-5" id="about">
+            <div class="container-lg">
+                <div class="row text-center">
+                     <h2>ABOUT</h2>
+                        <div class="col-lg-12 mb-3">
+                            <div class="divider"></div>
+                        </div>
+                </div>
+                <div class="row text-left">
+                    <h2>Motivation</h2>
+                    <div class="col-lg-6 mb-3 mt-2 text-justify">
+                        <p>
+                            Isn't it frustrating when you've dedicated countless hours searching for a solution to a problem you've already conquered before?
+                            This is a common experience that many of us can relate to, and it significantly hinder our productivity.
+                            The need to boost productivity by reducing the time we often use to search for solutions to problems that we often
+                            encounter led to the development of Eureka Tags, which is a  web-based application that aims to help students and professionals in various
+                            tech-related fields to document and organize solutions to various problems they’ve encountered.
+                            The application provides a concise way to document and organize solutions to these problems so that whenever
+                            such a problem is encountered again there would be a central knowledge repository
+                            that can be used to retrieve the correct solution, thus saving precious time and increasing productivity.
+
+                        </p>
+                    </div>
+
+                      <div class="col-lg-6 text-end">
+                            <img src="/static/images/creative_idea.png" class="img-fluid" style="width:300px"/>
+                      </div>
+
+                    <div class="col-lg-6 mb-3 mt-2 text-left">
+                        <img src="/static/images/developer.png" class="img-fluid" />
+                    </div>
+
+                     <div class="col-lg-6 mb-3 mt-5 text-justify">
+                         <h2 class="mb-3">About the Developer</h2>
+                        <p>
+                            This project has been developed by <b>Michael Hudson Nkotagu</b>, as part of the ALX Software engineering portfolio project.
+                            Lets connect with each other:
+                            <div class="mt-4">
+                                <a href="https://twitter.com/MNkotagu" class="social-link me-2 x-social"><i class="fa-brands fa-x-twitter"></i></a>
+                                <a href="https://github.com/m453h" target="_blank" class="social-link me-2 github-social"><i class="fa-brands fa-github"></i></a>
+                                <a href="https://www.linkedin.com/in/michael-hudson-nkotagu/" target="_blank" class="social-link me-2 linkedin-social"><i class="fa-brands fa-linkedin-in"></i></a>
+                            </div>
+
+                        </p>
+                         <p class="mt-5">This is an open source project, the source code for the project is available in GitHub</p>
+                         <a href="https://github.com/m453h/Eureka_tags" target="_blank" class="btn-custom btn-create shadow me-2 mt-3">View project in Github</a>
+                    </div>
+
+                </div>
+            </div>
+    </div>
+
+
+    <div class="mb-5 mt-5 text-center" id="learn-more" style="padding-top:100px;padding-bottom:100px">
+            <div class="container-lg">
+                <div class="row text-center">
+                     <h2>LEARN MORE</h2>
+                        <div class="col-lg-12 mb-3">
+                            <div class="divider"></div>
+                        </div>
+                        <p class="quote  mb-5">"Get to know more about Eureka Tags, the past and the future"</p>
+                </div>
+
+                <a data-fancybox="" href="https://www.youtube.com/watch?v=L4sNwcFli8I"><img src="/static/images/video.png" class="img-fluid" /></a>
+            </div>
+
+    </div>
+
 {% endblock %}

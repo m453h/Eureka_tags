@@ -13,27 +13,50 @@
         <script src="https://kit.fontawesome.com/c3d9459517.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"
                 integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-        <link href="../static/styles/main.css" rel="stylesheet">
-        <link href="../static/styles/header.css" rel="stylesheet">
-        <link rel="icon" href="../static/images/icon.png" />
+        <link href="/static/styles/main.css" rel="stylesheet">
+        <link href="/static/styles/header.css" rel="stylesheet">
+        <link rel="icon" href="/static/images/icon.png" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
         <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
         <script>
             $( document ).ready(function() {
-                    var simplemde = new SimpleMDE({ element: document.getElementById("editor") });
+                    var simplemde = new SimpleMDE({
+                            element: document.getElementById("editor"),
+                            autofocus: true,
+                            initialValue: "",
+                            placeholder: "Type here...",
+                    });
+
+                    $('.awesome-select').select2({
+                           theme: 'bootstrap-5'
+                    });
+
+                   $('span.create-post').click(function() {
+                        $('div.simply-hidden').fadeIn();
+                   });
+
+                   $('span.cancel-create-post').click(function() {
+                        $('div.simply-hidden').fadeOut();
+                   });
+
+                    $('.delete-btn').click(function() {
+
+                        let url = $(this).attr("href");
+
+                        $('.btn-confirm-delete').attr("href", url);
+
+                    });
             });
         </script>
-        <script>
-            $( document ).ready(function() {
 
-                 Fancybox.bind('[data-fancybox]', {
-                       // Custom options for all galleries
-                });
-
-             });
-         </script>
     {% endblock %}
 </head>
 
@@ -43,16 +66,19 @@
         <div class="header">
             <nav id="my-navigation-bar" class="navbar navbar-expand-lg navbar-light border-bottom bg-white">
                 <div class="container-lg">
-                    <a href="/" class="navbar-brand"><img src="../static/images/app_logo_alt.png" alt="Eureka Tags" class="logo"/></a>
-                    <div class="search">
-                        <form action="/search" method="GET">
-                             <input type="text" class="form-control" name="q" placeholder="Search for something...">
+                    <a href="/" class="navbar-brand"><img src="/static/images/app_logo_alt.png" alt="Eureka Tags" class="logo"/></a>
+                    {% if current_user.is_authenticated %}
+                    <div class="search mt-2 mt-md-0 me-5">
+                        <form action="/post/search" method="GET">
+                            {% block search_input %}
+                                    <input type="text" class="form-control" name="q" placeholder="Search for something...">
+                            {% endblock %}
                             <button class="btn btn-primary d-none"></button>
                         </form>
-
                     </div>
+                    {% endif %}
 
-                    <button class="navbar-toggler" type="button"
+                    <button class="navbar-toggler mt-3 mt-3" type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#main-nav"
                             aria-controls="main-nav"
@@ -62,11 +88,6 @@
                     </button>
 
                     <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item current first"><a href="/" class=" nav-link">Home</a></li>
-                            <li class="nav-item"><a href="#" class=" nav-link">About</a></li>
-                            <li class="nav-item last"><a href="#" class=" nav-link">Contact</a></li>
-                        </ul>
                         {% if current_user.is_authenticated %}
                          <div class="dropdown account-menu">
                                 <a class="dropdown-toggle btn btn-secondary text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -79,6 +100,11 @@
                                 </ul>
                             </div>
                         {% else %}
+                            <ul class="navbar-nav">
+                                <li class="nav-item current first"><a href="/" class=" nav-link">Home</a></li>
+                                <li class="nav-item"><a href="#features" class=" nav-link">Features</a></li>
+                                <li class="nav-item"><a href="#about" class=" nav-link">About</a></li>
+                            </ul>
                             <a class="ms-3 btn btn-primary" href="/login">Login</a>
                         {% endif %}
                     </div>

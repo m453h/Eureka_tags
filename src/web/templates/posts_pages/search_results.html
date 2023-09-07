@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block search_input %}
+    <input type="text" class="form-control" name="q" value="{{ request.args.get('q') }}" placeholder="Search for something...">
+{% endblock %}
+{% block content %}
+<div class="bg-gray">
+    <div class="container">
+        <div class="row">
+            {% include "components/side_bar.html" %}
+            <div class="col-lg-9 col-md-8 mb-5" style="min-height:1000px;">
+                <div class="container-lg align-content-end">
+                   <div class="alert alert-info mt-4 shadow-sm">
+                      <i class="fa-solid fa-circle-info ms-2 me-2"></i> Showing search results...
+                   </div>
+                </div>
+
+                {% for post in my_posts %}
+
+                <div class="container-lg mt-4 align-content-end">
+
+                     <div class="shadow-sm bg-white rounded information mb-3">
+                         <div class="container">
+                            <h3><a href="{{ url_for('posts_pages.view', post_id=post.id) }}" class="information-header">{{ post.title }}</a></h3>
+                           <div class="col-lg-12 meta mt-3">
+                                <ul class="post-tags">
+                                    <li class="date">{{ post.date_created.strftime('%d %B %Y') }}</li>
+                                    <li class="author">by <a href="#" title="Posts by admin" rel="author">{{ post.author.full_name }}</a></li>
+                                    <li class="tags">
+                                            {% for tag in post.tags %}
+                                                    <span class="badge rounded-pill bg-secondary"><a href="?t={{ tag.name }}&q={{ request.args.get('q') }}" class="text-white">{{tag.name}}</a></span>
+                                            {% endfor %}
+                                    </li>
+                                </ul>
+                           </div>
+                             <p>{{ post.content|truncate }}...</p>
+                             <a href="{{ url_for('posts_pages.view', post_id=post.id) }}" class="link-primary link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover"><i class="fa-solid fa-circle-info ms-2 me-2"></i>Read more</a>
+                             <a href="{{ url_for('posts_pages.edit', post_id=post.id) }}" class="link-primary link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover"><i class="fa-solid fa-pen-to-square ms-2 me-2"></i>Edit post</a>
+                             <a href="{{ url_for('posts_pages.delete', post_id=post.id) }}" class="delete-btn link-primary link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-trash ms-2 me-2"></i>Delete post</a>
+                         </div>
+                    </div>
+
+
+                </div>
+                {% endfor %}
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+ <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Confirm Action !</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to remove this post ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <a href="#" type="button" class="btn btn-danger btn-confirm-delete">Yes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

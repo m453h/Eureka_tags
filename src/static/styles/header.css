@@ -16,9 +16,7 @@ div.search input{
 }
 
 div.intro{
-        height:500px;
-        padding-top:150px;
-        background-color: #000;
+        background-color: #263FFF;
         background-image: url('../images/hero-1-bg.png')
 }
 
@@ -29,12 +27,13 @@ img.logo{
 a.btn-custom{
         text-decoration: none;
         display: inline-block;
-        padding:10px 18px;
+        padding:17px 25px;
         font-weight: bolder;
         color:#000;
         cursor: pointer;
         border-radius: 0.25rem;
         transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        text-transform: uppercase;
 }
 
 a.btn-login{
@@ -42,32 +41,45 @@ a.btn-login{
 }
 
 a.btn-create{
-        background-color: #08ff8c;
+        background-color: #FFF;
         font-weight: bolder;
+        color:#2E4CFF;
 }
 
 a.btn-learn{
-        background-color: #ff7979;
+        color:#FFF;
+        background-color: #012ead;
         font-weight: bolder;
 }
 
-a.btn-login:focus, a.btn-login:active, a.btn-login:hover{
-        background-color: #bdaf6c;
-        font-weight: bolder;
+div.divider {
+    background: #078cfc;
+    height: 3px;
+    margin: 15px auto;
+    width: 50px;
 }
 
-a.btn-create:focus, a.btn-create:hover{
-        background-color: #0ac56e;
-        font-weight: bolder;
+h2.styled-header{
+    font-weight:normal;
 }
 
-a.btn-learn:focus, a.btn-learn:hover{
-        background-color: #c45a5a;
-        font-weight: bolder;
-}
 
 div.feature{
         text-align:left;
+        margin-bottom:200px;
+}
+
+p.quote {
+    font-size:1.5em;
+    font-style:italic;
+}
+span.feature-number {
+    background: #2C4AFF;
+    font-size: 3em;
+    display: inline-block;
+    padding: 30px 51px;
+    border-radius: 100%;
+    color:#FFF;
 }
 
 div.feature a {
@@ -93,7 +105,30 @@ div.feature i.icon{
 }
 div.features {
         padding-top: 100px;
-        padding-bottom: 100px;
+}
+
+div#about{
+    background: #F4EDE4;
+    min-height:700px;
+    padding-top:40px;
+}
+a.social-link {
+    border-radius: 50%;
+    color: #fff;
+    display: inline-block;
+    font-size: 1.6em;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    width: 40px;
+    background:#000;
+}
+
+a.social-link:hover {
+    background:#2A56F1;
+}
+.text-justify{
+    text-align: justify;
 }
 div.footer{
     background: #2A56F1;
@@ -200,12 +235,12 @@ div.create-post{
     padding:30px;
     border-radius: 35px;
     padding-left: 1.6rem;
-    color:#666;
-    font-weight:bolder;
 }
-div.create-post a {
+span.create-post {
     text-decoration:none;
     color:#666;
+    font-weight:bolder;
+    cursor: pointer;
 }
 div.simply-hidden {
     display:none;

@@ -1,7 +1,12 @@
+from sqlalchemy.orm import object_session
+
 from src import db, login_manager
 from src.models import post
 from datetime import datetime
 from flask_login import UserMixin
+
+from src.models.post import Post
+from src.models.tag import Tag
 
 
 @login_manager.user_loader
@@ -19,6 +24,14 @@ class User(db.Model, UserMixin):
     date_updated = db.Column(db.DateTime(timezone=True), onupdate=datetime.utcnow)
     posts = db.relationship('Post', backref='author', lazy=True)
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'), nullable=False)
+
+    @property
+    def active_tags(self):
+        return object_session(self).query(Tag) \
+            .join(Post, Tag.posts) \
+            .filter(Post.user_id == self.id) \
+            .distinct() \
+            .all()
 
     def __repr__(self):
         return f"User('{self.email}', '{self.full_name}', '{self.account_status}')"
