@@ -45,6 +45,14 @@
                    $('span.cancel-create-post').click(function() {
                         $('div.simply-hidden').fadeOut();
                    });
+
+                    $('.delete-btn').click(function() {
+
+                        let url = $(this).attr("href");
+
+                        $('.btn-confirm-delete').attr("href", url);
+
+                    });
             });
         </script>
 
@@ -59,11 +67,12 @@
                 <div class="container-lg">
                     <a href="/" class="navbar-brand"><img src="/static/images/app_logo_alt.png" alt="Eureka Tags" class="logo"/></a>
                     <div class="search">
-                        <form action="/search" method="GET">
+                        <form action="/post/search" method="GET">
+                            {% block search_input %}
                              <input type="text" class="form-control" name="q" placeholder="Search for something...">
+                            {% endblock %}
                             <button class="btn btn-primary d-none"></button>
                         </form>
-
                     </div>
 
                     <button class="navbar-toggler" type="button"

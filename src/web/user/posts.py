@@ -2,6 +2,8 @@
 """ Starts a Flash Web Application """
 from flask import render_template, Blueprint, flash, redirect, url_for, request
 from flask_login import current_user
+import markdown
+from sqlalchemy import desc, text, or_
 
 from src import db
 from src.models.post import Post
@@ -57,3 +59,50 @@ def edit(post_id):
         return render_template('posts_pages/edit.html', form=form)
     else:
         return 'Error loading #{id}'.format(id=id)
+
+
+@posts_pages.route('/view/<int:post_id>', strict_slashes=False, methods=['GET'])
+def view(post_id):
+    q = db.session.query(Post).filter(Post.id == post_id)
+    post = q.first()
+
+    if post:
+        content = markdown.markdown(post.content)
+        post.content = content
+        return render_template('posts_pages/view.html', post=post)
+    else:
+        return 'Error loading #{id}'.format(id=id)
+
+
+@posts_pages.route('/delete/<int:post_id>', strict_slashes=False, methods=['GET'])
+def delete(post_id):
+    q = db.session.query(Post).filter(Post.id == post_id)
+    post = q.first()
+
+    if post:
+        post.tags.clear()
+        db.session.delete(post)
+        db.session.commit()
+
+        flash('Your post has been removed!', 'success')
+        return redirect(url_for('dashboard_pages.index'))
+    else:
+        return 'Error loading #{id}'.format(id=id)
+
+
+@posts_pages.route('/search', strict_slashes=False, methods=['GET'])
+def search():
+    search_content = request.args.get('q')
+    my_posts = Post.query. \
+        filter_by(user_id=current_user.id) \
+        .filter(
+                or_(
+                    text("title LIKE :content"),
+                    text("content LIKE :content")
+                )
+            ) \
+        .params(content=f"%{search_content}%") \
+        .order_by(desc(Post.date_created)) \
+        .all()
+
+    return render_template('posts_pages/search_results.html', my_posts=my_posts)
