@@ -9,7 +9,6 @@ from src import db
 from src.models.post import Post
 from src.models.tag import Tag
 from src.web.user.forms import PostForm
-from keybert import KeyBERT
 
 posts_pages = Blueprint('posts_pages', __name__,
                         template_folder='templates', url_prefix='/post')
