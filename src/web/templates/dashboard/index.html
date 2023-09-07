@@ -82,7 +82,7 @@
                                     <li class="author">by <a href="#" title="Posts by admin" rel="author">{{ post.author.full_name }}</a></li>
                                     <li class="tags">
                                             {% for tag in post.tags %}
-                                                    <span class="badge rounded-pill bg-secondary">{{tag.name}}</span>
+                                                    <span class="badge rounded-pill bg-secondary"><a href="?t={{ tag.name }}" class="text-white">{{tag.name}}</a></span>
                                             {% endfor %}
                                     </li>
                                 </ul>
