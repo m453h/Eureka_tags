@@ -56,6 +56,7 @@ def edit(post_id):
             flash('Your post has been updated!', 'success')
             return redirect(url_for('dashboard_pages.index'))
         form.tags.process_data(post.tags)
+        flash('Your are editing an existing post!', 'info')
         return render_template('posts_pages/edit.html', form=form)
     else:
         return 'Error loading #{id}'.format(id=id)

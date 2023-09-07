@@ -11,8 +11,8 @@
                      {% with messages = get_flashed_messages(with_categories=true) %}
                             {% if messages %}
                               {% for category, message in messages %}
-                                <div class="alert alert-{{ category }} mt-5">
-                                  {{ message }}
+                                <div class="alert alert-{{ category }}  shadow-sm">
+                                  <i class="fa-solid fa-circle-check me-2"></i>{{ message }}
                                 </div>
                               {% endfor %}
                             {% endif %}

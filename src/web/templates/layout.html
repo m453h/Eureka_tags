@@ -66,7 +66,7 @@
             <nav id="my-navigation-bar" class="navbar navbar-expand-lg navbar-light border-bottom bg-white">
                 <div class="container-lg">
                     <a href="/" class="navbar-brand"><img src="/static/images/app_logo_alt.png" alt="Eureka Tags" class="logo"/></a>
-                    <div class="search">
+                    <div class="search mt-2 mt-md-0">
                         <form action="/post/search" method="GET">
                             {% block search_input %}
                              <input type="text" class="form-control" name="q" placeholder="Search for something...">
@@ -75,7 +75,7 @@
                         </form>
                     </div>
 
-                    <button class="navbar-toggler" type="button"
+                    <button class="navbar-toggler mt-3 mt-3" type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#main-nav"
                             aria-controls="main-nav"
