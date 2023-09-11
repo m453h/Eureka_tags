@@ -1,3 +1,8 @@
+body{
+        background-color: #FFF;
+        font-size:0.9em;
+}
+
 div.header{
         background-color:#FFF;
 }
@@ -314,4 +319,8 @@ ul.side-menu li a:hover{
     -webkit-transition: 0.3s;
     -moz-transition: 0.3s;
     transition: 0.3s;
+}
+
+img.login-logo{
+    margin-top:100px;
 }
