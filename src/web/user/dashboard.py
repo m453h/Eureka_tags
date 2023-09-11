@@ -2,7 +2,7 @@
 """ Starts a Flash Web Application """
 import requests
 from flask import render_template, Blueprint, flash, redirect, url_for, request
-from flask_login import current_user
+from flask_login import current_user, login_required
 from sqlalchemy import desc
 
 from src import db
@@ -15,6 +15,7 @@ dashboard_pages = Blueprint('dashboard_pages', __name__,
 
 
 @dashboard_pages.route('/', strict_slashes=False, methods=['GET', 'POST'])
+@login_required
 def index():
     form = PostForm()
     tag = request.args.to_dict().get('t')

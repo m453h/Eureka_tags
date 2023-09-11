@@ -3,7 +3,7 @@
 from flask import render_template, Blueprint, flash, redirect, url_for
 
 from src.models.user import User
-from src import db, bcrypt
+from src import db, bcrypt, login_manager
 from src.web.authentication.forms import RegistrationForm, LoginForm
 from flask_login import login_user, current_user, logout_user
 
@@ -57,3 +57,9 @@ def reset():
 def logout():
     logout_user()
     return redirect(url_for('common_pages.index'))
+
+
+@login_manager.unauthorized_handler
+def unauthorized_callback():
+    flash('You need to login to view this page', 'warning')
+    return redirect(url_for('authentication_pages.login'))
