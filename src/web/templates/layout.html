@@ -27,13 +27,15 @@
 
         <script>
             $( document ).ready(function() {
+
+                if ($("#editor").length) {
                     var simplemde = new SimpleMDE({
                             element: document.getElementById("editor"),
                             autofocus: true,
                             initialValue: "",
                             placeholder: "Type here...",
                     });
-
+                }
                     $('.awesome-select').select2({
                            theme: 'bootstrap-5'
                     });
