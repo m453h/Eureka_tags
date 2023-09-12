@@ -37,7 +37,16 @@
                             toolbar: [
                                         "bold", "italic", "heading", "unordered-list", "ordered-list",
                                         "|", // Separator
-                                        "code", // Code formatting button
+                                      {
+                                        name: "code",
+                                        action: function (editor) {
+                                            var cm = editor.codemirror;
+                                            var selectedText = cm.getSelection();
+                                            cm.replaceSelection("<pre>\n" + selectedText + "\n</pre>");
+                                       },
+                                            className: "fa fa-code",
+                                            title: "Code",
+                                        },
                                         "|", // Separator
                                         "link", "quote", "image", "table", "horizontal-rule",
                                         "|", // Separator

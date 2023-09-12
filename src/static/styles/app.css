@@ -344,3 +344,7 @@ img.login-logo{
 #myBtn:hover {
   background-color: #555;
 }
+
+pre {
+    color: var(--bs-code-color);
+}

@@ -2,6 +2,7 @@
 """ Starts a Flash Web Application """
 from datetime import datetime
 
+import bleach
 from flask import render_template, Blueprint, redirect, url_for
 from flask_login import current_user
 
@@ -23,3 +24,12 @@ def index():
 @app.context_processor
 def inject_now():
     return {'now': datetime.utcnow()}
+
+
+def sanitize_html(value):
+    allowed_tags = {'pre', 'code'}
+    allowed_attributes = {}
+    return bleach.clean(value, tags=allowed_tags, attributes=allowed_attributes)
+
+
+app.jinja_env.filters['sanitize'] = sanitize_html

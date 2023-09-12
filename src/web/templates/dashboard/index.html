@@ -87,7 +87,7 @@
                                     </li>
                                 </ul>
                            </div>
-                             <p>{{ post.content|truncate }}...</p>
+                             <p>{{ post.content|sanitize|safe|truncate }}...</p>
                              <a href="{{ url_for('posts_pages.view', post_id=post.id) }}" class="link-primary link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover"><i class="fa-solid fa-circle-info ms-2 me-2"></i>Read more</a>
                              <a href="{{ url_for('posts_pages.edit', post_id=post.id) }}" class="link-primary link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover"><i class="fa-solid fa-pen-to-square ms-2 me-2"></i>Edit post</a>
                              <a href="{{ url_for('posts_pages.delete', post_id=post.id) }}" class="delete-btn link-primary link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-trash ms-2 me-2"></i>Delete post</a>
