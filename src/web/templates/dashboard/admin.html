@@ -3,7 +3,33 @@
 {% block extra_js %}
     <script type="text/javascript">
             $( document ).ready(function() {
-             const ctx = document.getElementById('myChart');
+
+              // Initialize the echarts instance based on the prepared dom
+      var myChart = echarts.init(document.getElementById('myChart'));
+
+      // Specify the configuration items and data for the chart
+      var option = {
+        tooltip: {},
+        legend: {
+          data: ['posts']
+        },
+        xAxis: {
+          data: [{{ totals.post_dates|safe }}]
+        },
+        yAxis: {},
+        series: [
+          {
+            name: 'posts',
+            type: 'bar',
+            data: [{{ totals.post_count }}]
+          }
+        ]
+      };
+
+      // Display the chart using the configuration items and data just specified.
+      myChart.setOption(option);
+
+            /* const ctx = document.getElementById('myChart');
                   new Chart(ctx, {
                     type: 'bar',
                     data: {
@@ -26,7 +52,7 @@
                         }
                       }
                     }
-                  });
+                  });*/
               });
         </script>
 {% endblock %}
@@ -112,7 +138,7 @@
                         Number of Posts Per Day
                     </div>
                     <div class="card-body">
-                        <canvas id="myChart" style="height:400px;"></canvas>
+                         <div id="myChart" class="col-lg-12" style="height:400px;"></div>
                     </div>
                 </div>
             </div>

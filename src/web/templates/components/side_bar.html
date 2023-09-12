@@ -27,6 +27,12 @@
 
                      <ul class="side-menu">
                          <li><a href="{{ url_for('dashboard_pages.index') }}"><span class="icon-spacer-right"><i class="fa-solid fa-house"></i></span>Home</a></li>
+                         {% if current_user.current_role == "Admin" %}
+                            <li><a href="{{ url_for('dashboard_pages.index') }}"><span class="icon-spacer-right"><i class="fa-solid fa-tags"></i></span>Manage Tags</a></li>
+                            <li><a href="{{ url_for('dashboard_pages.index') }}"><span class="icon-spacer-right"><i class="fa-solid fa-book"></i></span>Manage Posts</a></li>
+                            <li><a href="{{ url_for('dashboard_pages.index') }}"><span class="icon-spacer-right"><i class="fa-solid fa-users"></i></span>Manage Users</a></li>
+                         {% endif %}
+
                         <li><a href="{{ url_for('authentication_pages.change_password') }}"><span class="icon-spacer-right"><i class="fa-solid fa-lock"></i></span>Change Password</a></li>
                         <li><a href="/logout"><span class="icon-spacer-right"><i class="fa-solid fa-right-from-bracket"></i></span>Logout</a></li>
                      </ul>
