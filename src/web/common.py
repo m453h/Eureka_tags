@@ -5,7 +5,8 @@ from datetime import datetime
 from flask import render_template, Blueprint, redirect, url_for
 from flask_login import current_user
 
-from src import app
+from src import app, db
+from src.models.post import Post
 
 common_pages = Blueprint('common_pages', __name__,
                          template_folder='templates')

@@ -19,7 +19,6 @@ dashboard_pages = Blueprint('dashboard_pages', __name__,
 def index():
     form = PostForm()
     tag = request.args.to_dict().get('t')
-    print(current_user.active_tags)
     if form.validate_on_submit():
         post = Post(title=form.title.data, content=form.content.data, user_id=current_user.id,
                     is_public=form.is_public.data)
