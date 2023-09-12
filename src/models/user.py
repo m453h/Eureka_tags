@@ -18,8 +18,10 @@ class User(db.Model, UserMixin):
     full_name = db.Column(db.String(255), nullable=False)
     account_status = db.Column(db.String(2), nullable=False)
     password = db.Column(db.String(255), nullable=False)
-    date_created = db.Column(db.DateTime(timezone=True), default=datetime.utcnow, nullable=False)
-    date_updated = db.Column(db.DateTime(timezone=True), onupdate=datetime.utcnow)
+    date_created = db.Column(db.DateTime(timezone=True),
+                             default=datetime.utcnow, nullable=False)
+    date_updated = db.Column(db.DateTime(timezone=True),
+                             onupdate=datetime.utcnow)
     posts = db.relationship('Post', backref='author', lazy=True)
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'), nullable=False)
     has_password_reset_token = db.Column(db.Boolean, nullable=False, default=0)
@@ -61,4 +63,5 @@ class User(db.Model, UserMixin):
         return User.query.get(user_id)
 
     def __repr__(self):
-        return f"User('{self.email}', '{self.full_name}', '{self.account_status}')"
+        return f"User('{self.email}', '{self.full_name}'," \
+               f" '{self.account_status}')"

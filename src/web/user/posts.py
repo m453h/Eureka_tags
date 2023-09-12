@@ -77,11 +77,11 @@ def search():
     posts_query = Post.query. \
         filter_by(user_id=current_user.id) \
         .filter(
-        or_(
+          or_(
             text("title LIKE :content"),
             text("content LIKE :content")
-        )
-    ) \
+          )
+        ) \
         .params(content=f"%{search_content}%") \
         .order_by(desc(Post.date_created))
     page = request.args.get('page', 1, type=int)
