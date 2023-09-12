@@ -11,7 +11,8 @@ from src.models.tag import Tag
 from src.web.user.forms import PostForm
 
 dashboard_pages = Blueprint('dashboard_pages', __name__,
-                            template_folder='templates', url_prefix='/dashboard')
+                            template_folder='templates',
+                            url_prefix='/dashboard')
 
 
 @dashboard_pages.route('/', strict_slashes=False, methods=['GET', 'POST'])
@@ -20,7 +21,8 @@ def index():
     form = PostForm()
     tag = request.args.to_dict().get('t')
     if form.validate_on_submit():
-        post = Post(title=form.title.data, content=form.content.data, user_id=current_user.id,
+        post = Post(title=form.title.data, content=form.content.data,
+                    user_id=current_user.id,
                     is_public=form.is_public.data)
         post.tags = []
         for tag in form.tags.data:
@@ -40,4 +42,5 @@ def index():
 
     page = request.args.get('page', 1, type=int)
     my_posts = post_query.paginate(page=page, per_page=4)
-    return render_template('dashboard/index.html', form=form, my_posts=my_posts)
+    return render_template('dashboard/index.html', form=form,
+                           my_posts=my_posts)

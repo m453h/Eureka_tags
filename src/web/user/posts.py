@@ -13,7 +13,8 @@ posts_pages = Blueprint('posts_pages', __name__,
                         template_folder='templates', url_prefix='/post')
 
 
-@posts_pages.route('/edit/<int:post_id>', strict_slashes=False, methods=['GET', 'POST'])
+@posts_pages.route('/edit/<int:post_id>', strict_slashes=False,
+                   methods=['GET', 'POST'])
 @login_required
 def edit(post_id):
     q = db.session.query(Post).filter(Post.id == post_id)
@@ -43,7 +44,8 @@ def edit(post_id):
         return 'Error loading #{id}'.format(id=id)
 
 
-@posts_pages.route('/view/<int:post_id>', strict_slashes=False, methods=['GET'])
+@posts_pages.route('/view/<int:post_id>', strict_slashes=False,
+                   methods=['GET'])
 @login_required
 def view(post_id):
     q = db.session.query(Post).filter(Post.id == post_id)
@@ -55,7 +57,8 @@ def view(post_id):
         return 'Error loading #{id}'.format(id=id)
 
 
-@posts_pages.route('/delete/<int:post_id>', strict_slashes=False, methods=['GET'])
+@posts_pages.route('/delete/<int:post_id>', strict_slashes=False,
+                   methods=['GET'])
 def delete(post_id):
     q = db.session.query(Post).filter(Post.id == post_id)
     post = q.first()
@@ -87,4 +90,5 @@ def search():
     page = request.args.get('page', 1, type=int)
     my_posts = posts_query.paginate(page=page, per_page=4)
 
-    return render_template('posts_pages/search_results.html', my_posts=my_posts)
+    return render_template('posts_pages/search_results.html',
+                           my_posts=my_posts)
