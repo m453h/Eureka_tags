@@ -34,6 +34,15 @@
                             autofocus: true,
                             initialValue: "",
                             placeholder: "Type here...",
+                            toolbar: [
+                                        "bold", "italic", "heading", "unordered-list", "ordered-list",
+                                        "|", // Separator
+                                        "code", // Code formatting button
+                                        "|", // Separator
+                                        "link", "quote", "image", "table", "horizontal-rule",
+                                        "|", // Separator
+                                        "preview", "side-by-side", "fullscreen"
+                                      ]
                     });
                 }
                     $('.awesome-select').select2({

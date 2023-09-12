@@ -3,7 +3,7 @@
 from flask import render_template, Blueprint, flash, redirect, url_for
 
 from src.models.user import User
-from src import db, bcrypt, login_manager, mail
+from src import db, bcrypt, login_manager, mail, app
 from src.web.authentication.forms import RegistrationForm, LoginForm, RequestResetForm, ResetPasswordForm
 from flask_login import login_user, current_user, logout_user
 from flask_mail import Message
@@ -39,23 +39,37 @@ def register():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = User(email=form.email.data,
                     full_name=form.full_name.data,
-                    account_status="A",
+                    account_status="I",
                     role_id="1",
                     password=hashed_password)
         db.session.add(user)
         db.session.commit()
-        flash('You are account has been created, you are now able to login', 'success')
+        send_activation_email(user)
+        flash('You are account has been created, please check your e-mail for your account activation instructions',
+              'success')
         return redirect(url_for('authentication_pages.login'))
     return render_template('authentication/register.html', form=form)
 
 
 def send_reset_email(user):
     token = user.get_reset_token()
-    msg = Message('Password Reset Request', sender='mnkotagu@live.com', recipients=[user.email])
-    msg.body = f''' To reset your password, visit the following link:
-    {url_for('authentication_pages.reset_token', token=token, _external=True)}
-    If you did not make this request then simply ignore this email and no changes will be made
-    '''
+    msg = Message('Password Reset Request', sender=app.config['MAIL_USERNAME'], recipients=[user.email])
+    html_body = render_template('authentication/password_reset_email.html',
+                                recipient_name=user.full_name,
+                                reset_link=url_for('authentication_pages.reset_token', token=token, _external=True)
+                                )
+    msg.html = html_body
+    mail.send(msg)
+
+
+def send_activation_email(user):
+    token = user.get_reset_token()
+    msg = Message('Account Activation', sender=app.config['MAIL_USERNAME'], recipients=[user.email])
+    html_body = render_template('authentication/activation_email.html',
+                                recipient_name=user.full_name,
+                                activation_link=url_for('authentication_pages.activation_token', token=token,
+                                                        _external=True))
+    msg.html = html_body
     mail.send(msg)
 
 
@@ -96,6 +110,23 @@ def reset_token(token):
         flash('Your password has been updated, You are now able to log in!', 'success')
         return redirect(url_for('authentication_pages.login'))
     return render_template('authentication/password_reset_token.html', form=form)
+
+
+@authentication_pages.route('/activate/<token>', strict_slashes=False, methods=['GET', 'POST'])
+def activation_token(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('dashboard_pages.index'))
+
+    user = User.verify_reset_token(token)
+    print(user)
+    if user is None or not user.account_status == "I":
+        flash('That is an invalid or expired token, please reset your password', 'warning')
+        return redirect(url_for('authentication_pages.reset_request'))
+
+    user.account_status = 'A'
+    db.session.commit()
+    flash('Your account has been successfully activated, You are now able to log in!', 'success')
+    return redirect(url_for('authentication_pages.login'))
 
 
 @authentication_pages.route('/logout', strict_slashes=False)

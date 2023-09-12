@@ -15,8 +15,7 @@ class RegistrationForm(FlaskForm):
                                      validators=[DataRequired(), EqualTo('password', message='Passwords must match')])
     submit = SubmitField('Create Account')
 
-    @staticmethod
-    def validate_email(email):
+    def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError('The provided email address is already registered. Please choose a different one')
