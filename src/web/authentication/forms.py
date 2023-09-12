@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from wtforms.validators import DataRequired, Length, Email, EqualTo,\
+    ValidationError
 
 from src import bcrypt
 from src.models.user import User
@@ -15,13 +16,18 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('Password',
                              validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password',
-                                     validators=[DataRequired(), EqualTo('password', message='Passwords must match')])
+                                     validators=[DataRequired(),
+                                                 EqualTo('password',
+                                                         message='Passwords '
+                                                                 'must match')
+                                                 ])
     submit = SubmitField('Create Account')
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user:
-            raise ValidationError('The provided email address is already registered. Please choose a different one')
+            raise ValidationError('The provided email address is already '
+                                  'registered. Please choose a different one')
 
 
 class LoginForm(FlaskForm):
@@ -44,7 +50,11 @@ class ResetPasswordForm(FlaskForm):
                              validators=[DataRequired()])
 
     confirm_password = PasswordField('Confirm Password',
-                                     validators=[DataRequired(), EqualTo('password', message='Passwords must match')])
+                                     validators=[DataRequired(),
+                                                 EqualTo('password',
+                                                         message='Passwords'
+                                                                 ' must match')
+                                                 ])
 
     submit = SubmitField('Reset Password')
 
@@ -57,15 +67,20 @@ class ChangePasswordForm(FlaskForm):
                              validators=[DataRequired()])
 
     confirm_password = PasswordField('Confirm New Password',
-                                     validators=[DataRequired(), EqualTo('password', message='Passwords must match')])
+                                     validators=[DataRequired(),
+                                                 EqualTo('password',
+                                                         message='Passwords'
+                                                                 ' must match')
+                                                 ])
 
     submit = SubmitField('Reset Password')
 
     def validate_current_password(self, field):
         if not bcrypt.check_password_hash(current_user.password, field.data):
-            raise ValidationError('Incorrect current password has been entered')
+            raise ValidationError('Incorrect current password'
+                                  ' has been entered')
 
     def validate_password(self, field):
         if field.data == self.current_password.data:
-            raise ValidationError('New password must be different from the current password.')
-
+            raise ValidationError('New password must be different from the '
+                                  'current password.')
