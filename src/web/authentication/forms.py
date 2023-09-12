@@ -11,9 +11,12 @@ class RegistrationForm(FlaskForm):
                         validators=[DataRequired(), Email()])
     password = PasswordField('Password',
                              validators=[DataRequired()])
+    confirm_password = PasswordField('Confirm Password',
+                                     validators=[DataRequired(), EqualTo('password', message='Passwords must match')])
     submit = SubmitField('Create Account')
 
-    def validate_email(self, email):
+    @staticmethod
+    def validate_email(email):
         user = User.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError('The provided email address is already registered. Please choose a different one')
@@ -21,7 +24,24 @@ class RegistrationForm(FlaskForm):
 
 class LoginForm(FlaskForm):
     username = StringField('Username',
-                        validators=[DataRequired(), Email()])
+                           validators=[DataRequired(), Email()])
     password = PasswordField('Password',
                              validators=[DataRequired()])
     submit = SubmitField('Login')
+
+
+class RequestResetForm(FlaskForm):
+    email = StringField('E-mail',
+                        validators=[DataRequired(), Email()])
+
+    submit = SubmitField('Reset Password')
+
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('Password',
+                             validators=[DataRequired()])
+
+    confirm_password = PasswordField('Confirm Password',
+                                     validators=[DataRequired(), EqualTo('password', message='Passwords must match')])
+
+    submit = SubmitField('Reset Password')

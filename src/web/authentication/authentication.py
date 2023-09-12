@@ -3,9 +3,10 @@
 from flask import render_template, Blueprint, flash, redirect, url_for
 
 from src.models.user import User
-from src import db, bcrypt, login_manager
-from src.web.authentication.forms import RegistrationForm, LoginForm
+from src import db, bcrypt, login_manager, mail
+from src.web.authentication.forms import RegistrationForm, LoginForm, RequestResetForm, ResetPasswordForm
 from flask_login import login_user, current_user, logout_user
+from flask_mail import Message
 
 authentication_pages = Blueprint('authentication_pages', __name__,
                                  template_folder='templates')
@@ -48,9 +49,53 @@ def register():
     return render_template('authentication/register.html', form=form)
 
 
-@authentication_pages.route('/reset-password', strict_slashes=False)
-def reset():
-    return render_template('authentication/password_reset.html')
+def send_reset_email(user):
+    token = user.get_reset_token()
+    msg = Message('Password Reset Request', sender='mnkotagu@live.com', recipients=[user.email])
+    msg.body = f''' To reset your password, visit the following link:
+    {url_for('authentication_pages.reset_token', token=token, _external=True)}
+    If you did not make this request then simply ignore this email and no changes will be made
+    '''
+    mail.send(msg)
+
+
+@authentication_pages.route('/reset-password', strict_slashes=False, methods=['GET', 'POST'])
+def reset_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('dashboard_pages.index'))
+
+    form = RequestResetForm()
+
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        user.has_password_reset_token = True
+        db.session.commit()
+        send_reset_email(user)
+        flash('An email has been sent with instructions to reset your password', 'info')
+        return redirect(url_for('authentication_pages.login'))
+
+    return render_template('authentication/password_reset_request.html', form=form)
+
+
+@authentication_pages.route('/reset-password/<token>', strict_slashes=False, methods=['GET', 'POST'])
+def reset_token(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('dashboard_pages.index'))
+
+    user = User.verify_reset_token(token)
+    if user is None or not user.has_password_reset_token:
+        flash('That is an invalid or expired token', 'warning')
+        return redirect(url_for('authentication_pages.reset_request'))
+
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user.password = hashed_password
+        user.has_password_reset_token = False
+        db.session.commit()
+        flash('Your password has been updated, You are now able to log in!', 'success')
+        return redirect(url_for('authentication_pages.login'))
+    return render_template('authentication/password_reset_token.html', form=form)
 
 
 @authentication_pages.route('/logout', strict_slashes=False)

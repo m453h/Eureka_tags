@@ -1,6 +1,7 @@
 from sqlalchemy.orm import object_session
 
-from src import db, login_manager
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from src import db, login_manager, app
 from src.models import post
 from datetime import datetime
 from flask_login import UserMixin
@@ -24,6 +25,8 @@ class User(db.Model, UserMixin):
     date_updated = db.Column(db.DateTime(timezone=True), onupdate=datetime.utcnow)
     posts = db.relationship('Post', backref='author', lazy=True)
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'), nullable=False)
+    has_password_reset_token = db.Column(db.Boolean, nullable=False, default=0)
+
 
     @property
     def active_tags(self):
@@ -32,6 +35,19 @@ class User(db.Model, UserMixin):
             .filter(Post.user_id == self.id) \
             .distinct() \
             .all()
+
+    def get_reset_token(self, expires_sec=1800):
+        s = Serializer(app.config['SECRET_KEY'], expires_sec)
+        return s.dumps({'user_id': self.id}).decode('utf-8')
+
+    @staticmethod
+    def verify_reset_token(token):
+        s = Serializer(app.config['SECRET_KEY'])
+        try:
+            user_id = s.loads(token)['user_id']
+        except:
+            return None
+        return User.query.get(user_id)
 
     def __repr__(self):
         return f"User('{self.email}', '{self.full_name}', '{self.account_status}')"
