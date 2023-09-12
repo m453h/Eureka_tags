@@ -4,7 +4,8 @@ from flask import render_template, Blueprint, flash, redirect, url_for
 
 from src.models.user import User
 from src import db, bcrypt, login_manager, mail, app
-from src.web.authentication.forms import RegistrationForm, LoginForm, RequestResetForm, ResetPasswordForm, \
+from src.web.authentication.forms import RegistrationForm, LoginForm, \
+    RequestResetForm, ResetPasswordForm, \
     ChangePasswordForm
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
@@ -15,10 +16,13 @@ authentication_pages = Blueprint('authentication_pages', __name__,
 
 def send_reset_email(user):
     token = user.get_reset_token()
-    msg = Message('Password Reset Request', sender=app.config['MAIL_USERNAME'], recipients=[user.email])
+    msg = Message('Password Reset Request', sender=app.config['MAIL_USERNAME'],
+                  recipients=[user.email])
     html_body = render_template('authentication/password_reset_email.html',
                                 recipient_name=user.full_name,
-                                reset_link=url_for('authentication_pages.reset_token', token=token, _external=True)
+                                reset_link=url_for('authentication\
+                                _pages.reset_token', token=token,
+                                                   _external=True)
                                 )
     msg.html = html_body
     mail.send(msg)
@@ -26,16 +30,19 @@ def send_reset_email(user):
 
 def send_activation_email(user):
     token = user.get_reset_token()
-    msg = Message('Account Activation', sender=app.config['MAIL_USERNAME'], recipients=[user.email])
+    msg = Message('Account Activation', sender=app.config['MAIL_USERNAME'],
+                  recipients=[user.email])
     html_body = render_template('authentication/activation_email.html',
                                 recipient_name=user.full_name,
-                                activation_link=url_for('authentication_pages.activation_token', token=token,
+                                activation_link=url_for('authentication_\
+                                pages.activation_token', token=token,
                                                         _external=True))
     msg.html = html_body
     mail.send(msg)
 
 
-@authentication_pages.route('/login', strict_slashes=False, methods=['GET', 'POST'])
+@authentication_pages.route('/login', strict_slashes=False,
+                            methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('dashboard_pages.index'))
@@ -43,23 +50,30 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.username.data).first()
-        if user and bcrypt.check_password_hash(user.password, form.password.data):
-            login_user(user)
-            return redirect(url_for('dashboard_pages.index'))
+        if user and bcrypt.check_password_hash(user.password,
+                                               form.password.data):
+            if user.account_status == "A":
+                login_user(user)
+            else:
+                flash('You need to activate your account before you login',
+                      'danger')
+            return redirect(url_for('authentication_pages.login'))
         else:
             flash('Invalid username or password', 'danger')
 
     return render_template('authentication/login.html', form=form)
 
 
-@authentication_pages.route('/register', strict_slashes=False, methods=['GET', 'POST'])
+@authentication_pages.route('/register', strict_slashes=False,
+                            methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('dashboard_pages.index'))
 
     form = RegistrationForm()
     if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        hashed_password = bcrypt.generate_password_hash(form.password.data)\
+            .decode('utf-8')
         user = User(email=form.email.data,
                     full_name=form.full_name.data,
                     account_status="I",
@@ -68,13 +82,15 @@ def register():
         db.session.add(user)
         db.session.commit()
         send_activation_email(user)
-        flash('You are account has been created, please check your e-mail for your account activation instructions',
+        flash('You are account has been created, please check your e-mail '
+              'for your account activation instructions',
               'success')
         return redirect(url_for('authentication_pages.login'))
     return render_template('authentication/register.html', form=form)
 
 
-@authentication_pages.route('/reset-password', strict_slashes=False, methods=['GET', 'POST'])
+@authentication_pages.route('/reset-password', strict_slashes=False,
+                            methods=['GET', 'POST'])
 def reset_request():
     if current_user.is_authenticated:
         return redirect(url_for('dashboard_pages.index'))
@@ -86,13 +102,17 @@ def reset_request():
         user.has_password_reset_token = True
         db.session.commit()
         send_reset_email(user)
-        flash('An email has been sent with instructions to reset your password', 'info')
+        flash('An email has been sent with instructions to '
+              'reset your password',
+              'info')
         return redirect(url_for('authentication_pages.login'))
 
-    return render_template('authentication/password_reset_request.html', form=form)
+    return render_template('authentication/password_reset_request.html',
+                           form=form)
 
 
-@authentication_pages.route('/reset-password/<token>', strict_slashes=False, methods=['GET', 'POST'])
+@authentication_pages.route('/reset-password/<token>', strict_slashes=False,
+                            methods=['GET', 'POST'])
 def reset_token(token):
     if current_user.is_authenticated:
         return redirect(url_for('dashboard_pages.index'))
@@ -104,16 +124,20 @@ def reset_token(token):
 
     form = ResetPasswordForm()
     if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        hashed_password = bcrypt.generate_password_hash(form.password.data)\
+            .decode('utf-8')
         user.password = hashed_password
         user.has_password_reset_token = False
         db.session.commit()
-        flash('Your password has been updated, You are now able to log in!', 'success')
+        flash('Your password has been updated, You are now able to log in!',
+              'success')
         return redirect(url_for('authentication_pages.login'))
-    return render_template('authentication/password_reset_token.html', form=form)
+    return render_template('authentication/password_reset_token.html',
+                           form=form)
 
 
-@authentication_pages.route('/activate/<token>', strict_slashes=False, methods=['GET', 'POST'])
+@authentication_pages.route('/activate/<token>', strict_slashes=False,
+                            methods=['GET', 'POST'])
 def activation_token(token):
     if current_user.is_authenticated:
         return redirect(url_for('dashboard_pages.index'))
@@ -121,23 +145,28 @@ def activation_token(token):
     user = User.verify_reset_token(token)
     print(user)
     if user is None or not user.account_status == "I":
-        flash('That is an invalid or expired token, please reset your password', 'warning')
+        flash('That is an invalid or expired token, please reset'
+              ' your password', 'warning')
         return redirect(url_for('authentication_pages.reset_request'))
 
     user.account_status = 'A'
     db.session.commit()
-    flash('Your account has been successfully activated, You are now able to log in!', 'success')
+    flash('Your account has been successfully activated, You are now able to '
+          'log in!', 'success')
     return redirect(url_for('authentication_pages.login'))
 
 
-@authentication_pages.route('/change-password', strict_slashes=False, methods=['GET', 'POST'])
+@authentication_pages.route('/change-password', strict_slashes=False,
+                            methods=['GET', 'POST'])
 @login_required
 def change_password():
     form = ChangePasswordForm()
     if form.validate_on_submit():
-        current_user.password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        current_user.password = bcrypt\
+            .generate_password_hash(form.password.data).decode('utf-8')
         db.session.commit()
-        flash('Your password has been changed, you need to login to continue', 'info')
+        flash('Your password has been changed, you need to login to continue',
+              'info')
         logout_user()
         return redirect(url_for('authentication_pages.login'))
 
