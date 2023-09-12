@@ -1,0 +1,122 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block extra_js %}
+    <script type="text/javascript">
+            $( document ).ready(function() {
+             const ctx = document.getElementById('myChart');
+                  new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                      labels: [{{ totals.post_dates|safe }}],
+                      datasets: [{
+                        label: '# of Posts',
+                        data: [{{ totals.post_count }}],
+                        backgroundColor:'rgb(253, 121, 168)',
+                        borderColor:'rgb(232, 67, 147)',
+                        borderWidth: 1
+                      }]
+                    },
+                    options: {
+                      scales: {
+                        y: {
+                          beginAtZero: true,
+                          ticks: {
+                                   precision: 0
+                                }
+                        }
+                      }
+                    }
+                  });
+              });
+        </script>
+{% endblock %}
+{% block content %}
+<div class="bg-gray">
+    <div class="container">
+        <div class="row">
+            {% include "components/side_bar.html" %}
+            <div class="col-lg-9 col-md-8 mb-5" style="min-height:1000px;">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 mt-4">
+                    <div class="col">
+                        <div class="card border-start border-0 shadow-sm mb-3">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <p class="mb-0 text-secondary">Total
+                                            Active Users</p>
+                                        <h4 class="my-1 text-success">{{
+                                            totals.active_users }}</h4>
+                                    </div>
+                                    <div class="widgets-icons-2 rounded-circle bg-success text-white ms-auto">
+                                        <i class="fa-solid fa-user-check"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card border-start border-0 shadow-sm mb-3">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <p class="mb-0 text-secondary">Total
+                                            Posts</p>
+                                        <h4 class="my-1 text-info">{{
+                                            totals.posts }}</h4>
+                                    </div>
+                                    <div class="widgets-icons-2 rounded-circle bg-info text-white ms-auto">
+                                        <i class="fa-solid fa-book"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card border-start border-0 shadow-sm mb-3">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <p class="mb-0 text-secondary">Total
+                                            Tags</p>
+                                        <h4 class="my-1 text-warning">{{
+                                            totals.tags }}</h4>
+                                    </div>
+                                    <div class="widgets-icons-2 rounded-circle bg-warning text-white ms-auto">
+                                        <i class="fa-solid fa-tags"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card border-start border-0 shadow-sm mb-3">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <p class="mb-0 text-secondary">Total
+                                            Inactive Users</p>
+                                        <h4 class="my-1 text-danger">{{
+                                            totals.inactive_users }}</h4>
+                                    </div>
+                                    <div class="widgets-icons-2 rounded-circle bg-danger text-white ms-auto">
+                                        <i class="fa-solid fa-user-slash"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card col-lg-12 shadow-sm mt-3">
+                    <div class="card-header">
+                        Number of Posts Per Day
+                    </div>
+                    <div class="card-body">
+                        <canvas id="myChart" style="height:400px;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

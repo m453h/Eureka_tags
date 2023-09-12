@@ -12,4 +12,4 @@ class Role(db.Model):
     users = db.relationship('User', backref='user', lazy=True)
 
     def __repr__(self):
-        return f"User('{self.id}', '{self.name}')"
+        return f"Role('{self.id}', '{self.description}')"

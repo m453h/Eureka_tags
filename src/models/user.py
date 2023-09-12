@@ -4,6 +4,7 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from sqlalchemy.orm import object_session
 from src import db, login_manager, app
 from src.models.post import Post
+from src.models.role import Role
 from src.models.tag import Tag
 
 
@@ -40,8 +41,15 @@ class User(db.Model, UserMixin):
             .join(Post, Tag.posts) \
             .filter(Post.user_id == self.id) \
             .distinct() \
-            .all()
-        return len(tags)
+            .count()
+        return tags
+
+    @property
+    def current_role(self):
+        role = object_session(self).query(Role) \
+            .filter(Role.id == self.role_id) \
+            .first()
+        return role.description
 
     @property
     def posts_count(self):
