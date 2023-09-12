@@ -365,3 +365,51 @@ pre {
     color: #fff!important;
 }
 
+table.data-grid{
+    width:100%;
+    text-align: left;
+    border-collapse: collapse;
+    font-size: 1em;
+}
+table.data-grid td{
+    border: 1px solid #E7ECF1;;
+    padding:12px 10px;
+}
+
+table.data-grid tr.odd{
+    background-color: #FBFCFD;
+}
+
+table.data-grid tbody tr:hover{
+    background: #f3f7f9;
+    cursor:default;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+table.data-grid th{
+    border: 1px solid #E7ECF1;;
+    border-bottom:2px solid #E7ECF1;
+}
+
+table.data-grid th a,table.data-grid th span{
+    text-decoration: none;
+    color:#777777;
+    display: block;
+    padding:15px 10px;
+}
+
+table.data-grid th.number{
+    width:60px;
+}
+
+table.data-grid a.link{
+    text-decoration: none;
+    color:#5B9BD1;
+}
+
+table.data-grid a.link:hover{
+    text-decoration: underline;
+}

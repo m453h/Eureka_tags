@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="bg-gray">
+    <div class="container">
+        <div class="row">
+            {% include "components/side_bar.html" %}
+            <div class="col-lg-9 col-md-8 mb-5" style="min-height:1000px;">
+                <div class="card col-lg-12 border-0 shadow-sm mt-4">
+                    <div class="card-header border-0">
+                        Existing Tags
+                    </div>
+                    <div class="card-body">
+                        {% include "components/flash_message.html" %}
+
+                        <div class="action-bar mb-3">
+                            <a href="{{ url_for('manage_tags_pages.add') }}" class="btn btn-primary me-2 mb-2 mb-md-0">Add<i class="fa fa-plus ms-2"></i></a>
+                        </div>
+                         <table class="data-grid">
+                             <thead>
+                                <tr>
+                                 <th class="number"><span>S/N</span></th>
+                                 <th><span>Name</span></th>
+                                 <th><span>Action</span></th>
+                                </tr>
+                             </thead>
+                                <tbody>
+                                    {% for tag in tags.items %}
+                                    <tr  class="odd">
+                                        <td>{{ loop.index + (tags.page - 1) * tags.per_page }}.</td>
+                                        <td>{{ tag.name }}</td>
+                                        <td class="action text-center" style="width:200px">
+                                            <a href="{{ url_for('manage_tags_pages.edit', tag_id=tag.id) }}" class="btn btn-warning text-white mb-2" title="Click to edit record"><i class="fa fa-pencil"></i></a>
+                                            <a href="{{ url_for('manage_tags_pages.delete', tag_id=tag.id) }}" class="btn btn-danger delete-btn mb-2" title="Click to delete record" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                         </table>
+
+                        <div class="pagination-list mt-3">
+                            <ul class="pagination">
+                                {% if tags.has_prev %}
+                                    <li class="page-item"><a class="page-link" href="{{ url_for('manage_tags_pages.index', page=tags.prev_num, q=request.args.get('q')) }}" rel="next">Previous</a></li>
+                                {% else %}
+                                    <li class="page-item  disabled"><span class="page-link">Previous</span></li>
+                                {% endif %}
+                                 {% for page_num in tags.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                                   {% if page_num %}
+                                        {%if tags.page == page_num %}
+                                            <li class="page-item active">
+                                        {% else %}
+                                           <li class="page-item">
+                                        {% endif %}
+                                            <a class="page-link" href="{{ url_for('manage_tags_pages.index', page=page_num, q=request.args.get('q')) }}">{{ page_num }}</a></li>
+                                   {% else %}
+                                        ...
+                                   {% endif %}
+                                {% endfor %}
+                                {% if tags.has_next %}
+                                    <li class="page-item"><a class="page-link" href="{{ url_for('manage_tags_pages.index', page=tags.next_num, q=request.args.get('q')) }}" rel="next">Next</a></li>
+                                {% else %}
+                                    <li class="page-item disabled"><span class="page-link">Next</span></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include "components/delete_modal.html" %}
+{% endblock %}

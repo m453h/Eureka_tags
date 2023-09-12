@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="bg-gray">
+    <div class="container">
+        <div class="row">
+            {% include "components/side_bar.html" %}
+            <div class="col-lg-9 col-md-8 mb-5" style="min-height:1000px;">
+                <div class="card col-lg-12 border-0 shadow-sm mt-4">
+                    <div class="card-header border-0">
+                        {{ title }}
+                    </div>
+                    <div class="card-body">
+                          <form method="POST", action="">
+                                 {{ form.hidden_tag() }}
+                                <div class="form-outline mb-4">
+                                    {{ form.name.label(class="form-label") }}
+                                      {% if form.name.errors %}
+                                            {{ form.name(class="form-control form-control-lg is-invalid") }}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.name.errors %}
+                                                    <span>{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                      {% else %}
+                                            {{ form.name(class="form-control form-control-lg") }}
+                                      {% endif %}
+                                </div>
+                                {{ form.submit(class="btn btn-primary me-3") }}
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
