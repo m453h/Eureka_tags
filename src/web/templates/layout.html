@@ -104,7 +104,6 @@
                                     My Account
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" href="#">Profile Settings</a></li>
                                     <li><a class="dropdown-item" href="#">Change Password</a></li>
                                     <li><a class="dropdown-item" href="/logout">Logout</a></li>
                                 </ul>
@@ -130,7 +129,7 @@
     {% block footer %}
         <div class="footer">
             <div class="container-lg">
-               <p class="text-light"> &copy; 2023 Eureka Tags</p>
+               <p class="text-light"> &copy; {{ now.year }} Eureka Tags</p>
             </div>
         </div>
     {% endblock %}
