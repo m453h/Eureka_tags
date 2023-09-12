@@ -1,6 +1,5 @@
-from src import db
-from src.models import tag
 from datetime import datetime
+from src import db
 
 post_tag = db.Table('post_tag',
                     db.Column('post_id', db.Integer, db.ForeignKey('post.id')),

@@ -1,6 +1,5 @@
-from src import db
 from datetime import datetime
-from src.models import user
+from src import db
 
 
 class Role(db.Model):

@@ -1,12 +1,8 @@
-from sqlalchemy.orm import object_session
-
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from src import db, login_manager, app
-from sqlalchemy.sql import text
-from src.models import post
 from datetime import datetime
 from flask_login import UserMixin
-
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from sqlalchemy.orm import object_session
+from src import db, login_manager, app
 from src.models.post import Post
 from src.models.tag import Tag
 

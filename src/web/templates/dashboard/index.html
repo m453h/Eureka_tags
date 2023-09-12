@@ -69,7 +69,7 @@
 
                 </div>
 
-                {% for post in my_posts %}
+                {% for post in my_posts.items  %}
 
                 <div class="container-lg mt-4 align-content-end">
 
@@ -87,7 +87,7 @@
                                     </li>
                                 </ul>
                            </div>
-                             <p>{{ post.content|sanitize|safe|truncate }}...</p>
+                             <p>{{ post.content|markdown_to_html|sanitize|safe|truncate }}...</p>
                              <a href="{{ url_for('posts_pages.view', post_id=post.id) }}" class="link-primary link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover"><i class="fa-solid fa-circle-info ms-2 me-2"></i>Read more</a>
                              <a href="{{ url_for('posts_pages.edit', post_id=post.id) }}" class="link-primary link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover"><i class="fa-solid fa-pen-to-square ms-2 me-2"></i>Edit post</a>
                              <a href="{{ url_for('posts_pages.delete', post_id=post.id) }}" class="delete-btn link-primary link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-trash ms-2 me-2"></i>Delete post</a>
@@ -97,7 +97,35 @@
 
                 </div>
                 {% endfor %}
+                <div class="container-lg mt-4 align-content-end">
+                    <div class="pagination-list mt-3">
+                    <ul class="pagination">
+                        {% if my_posts.has_prev %}
+                            <li class="page-item"><a class="page-link" href="{{ url_for('dashboard_pages.index', page=my_posts.prev_num, t=request.args.get('t')) }}" rel="next">Previous</a></li>
+                        {% else %}
+                            <li class="page-item  disabled"><span class="page-link">Previous</span></li>
+                        {% endif %}
+                         {% for page_num in my_posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                           {% if page_num %}
+                                {%if my_posts.page == page_num %}
+                                    <li class="page-item active">
+                                {% else %}
+                                   <li class="page-item">
+                                {% endif %}
+                                    <a class="page-link" href="{{ url_for('dashboard_pages.index', page=page_num, t=request.args.get('t')) }}">{{ page_num }}</a></li>
+                           {% else %}
+                                ...
+                           {% endif %}
+                        {% endfor %}
+                        {% if my_posts.has_next %}
+                            <li class="page-item"><a class="page-link" href="{{ url_for('dashboard_pages.index', page=my_posts.next_num, t=request.args.get('t')) }}" rel="next">Next</a></li>
+                        {% else %}
+                            <li class="page-item disabled"><span class="page-link">Next</span></li>
+                        {% endif %}
+                    </ul>
+                </div>
 
+                </div>
 
             </div>
         </div>

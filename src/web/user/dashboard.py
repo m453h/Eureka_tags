@@ -38,6 +38,6 @@ def index():
         post_query = post_query.join(Post.tags) \
             .filter(Tag.name == tag) \
 
-    my_posts = post_query.all()
-
+    page = request.args.get('page', 1, type=int)
+    my_posts = post_query.paginate(page=page, per_page=2)
     return render_template('dashboard/index.html', form=form, my_posts=my_posts)
