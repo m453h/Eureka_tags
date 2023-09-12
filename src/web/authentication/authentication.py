@@ -12,6 +12,28 @@ authentication_pages = Blueprint('authentication_pages', __name__,
                                  template_folder='templates')
 
 
+def send_reset_email(user):
+    token = user.get_reset_token()
+    msg = Message('Password Reset Request', sender=app.config['MAIL_USERNAME'], recipients=[user.email])
+    html_body = render_template('authentication/password_reset_email.html',
+                                recipient_name=user.full_name,
+                                reset_link=url_for('authentication_pages.reset_token', token=token, _external=True)
+                                )
+    msg.html = html_body
+    mail.send(msg)
+
+
+def send_activation_email(user):
+    token = user.get_reset_token()
+    msg = Message('Account Activation', sender=app.config['MAIL_USERNAME'], recipients=[user.email])
+    html_body = render_template('authentication/activation_email.html',
+                                recipient_name=user.full_name,
+                                activation_link=url_for('authentication_pages.activation_token', token=token,
+                                                        _external=True))
+    msg.html = html_body
+    mail.send(msg)
+
+
 @authentication_pages.route('/login', strict_slashes=False, methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -49,28 +71,6 @@ def register():
               'success')
         return redirect(url_for('authentication_pages.login'))
     return render_template('authentication/register.html', form=form)
-
-
-def send_reset_email(user):
-    token = user.get_reset_token()
-    msg = Message('Password Reset Request', sender=app.config['MAIL_USERNAME'], recipients=[user.email])
-    html_body = render_template('authentication/password_reset_email.html',
-                                recipient_name=user.full_name,
-                                reset_link=url_for('authentication_pages.reset_token', token=token, _external=True)
-                                )
-    msg.html = html_body
-    mail.send(msg)
-
-
-def send_activation_email(user):
-    token = user.get_reset_token()
-    msg = Message('Account Activation', sender=app.config['MAIL_USERNAME'], recipients=[user.email])
-    html_body = render_template('authentication/activation_email.html',
-                                recipient_name=user.full_name,
-                                activation_link=url_for('authentication_pages.activation_token', token=token,
-                                                        _external=True))
-    msg.html = html_body
-    mail.send(msg)
 
 
 @authentication_pages.route('/reset-password', strict_slashes=False, methods=['GET', 'POST'])
