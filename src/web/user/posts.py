@@ -85,6 +85,6 @@ def search():
         .params(content=f"%{search_content}%") \
         .order_by(desc(Post.date_created))
     page = request.args.get('page', 1, type=int)
-    my_posts = posts_query.paginate(page=page, per_page=2)
+    my_posts = posts_query.paginate(page=page, per_page=4)
 
     return render_template('posts_pages/search_results.html', my_posts=my_posts)

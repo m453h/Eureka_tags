@@ -39,5 +39,5 @@ def index():
             .filter(Tag.name == tag) \
 
     page = request.args.get('page', 1, type=int)
-    my_posts = post_query.paginate(page=page, per_page=2)
+    my_posts = post_query.paginate(page=page, per_page=4)
     return render_template('dashboard/index.html', form=form, my_posts=my_posts)
