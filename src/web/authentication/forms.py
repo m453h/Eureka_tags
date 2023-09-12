@@ -1,7 +1,10 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+
+from src import bcrypt
 from src.models.user import User
+from flask_login import current_user
 
 
 class RegistrationForm(FlaskForm):
@@ -44,3 +47,25 @@ class ResetPasswordForm(FlaskForm):
                                      validators=[DataRequired(), EqualTo('password', message='Passwords must match')])
 
     submit = SubmitField('Reset Password')
+
+
+class ChangePasswordForm(FlaskForm):
+    current_password = PasswordField('Current Password',
+                                     validators=[DataRequired()])
+
+    password = PasswordField('New Password',
+                             validators=[DataRequired()])
+
+    confirm_password = PasswordField('Confirm New Password',
+                                     validators=[DataRequired(), EqualTo('password', message='Passwords must match')])
+
+    submit = SubmitField('Reset Password')
+
+    def validate_current_password(self, field):
+        if not bcrypt.check_password_hash(current_user.password, field.data):
+            raise ValidationError('Incorrect current password has been entered')
+
+    def validate_password(self, field):
+        if field.data == self.current_password.data:
+            raise ValidationError('New password must be different from the current password.')
+

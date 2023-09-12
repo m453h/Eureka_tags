@@ -4,8 +4,9 @@ from flask import render_template, Blueprint, flash, redirect, url_for
 
 from src.models.user import User
 from src import db, bcrypt, login_manager, mail, app
-from src.web.authentication.forms import RegistrationForm, LoginForm, RequestResetForm, ResetPasswordForm
-from flask_login import login_user, current_user, logout_user
+from src.web.authentication.forms import RegistrationForm, LoginForm, RequestResetForm, ResetPasswordForm, \
+    ChangePasswordForm
+from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 
 authentication_pages = Blueprint('authentication_pages', __name__,
@@ -127,6 +128,20 @@ def activation_token(token):
     db.session.commit()
     flash('Your account has been successfully activated, You are now able to log in!', 'success')
     return redirect(url_for('authentication_pages.login'))
+
+
+@authentication_pages.route('/change-password', strict_slashes=False, methods=['GET', 'POST'])
+@login_required
+def change_password():
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        current_user.password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        db.session.commit()
+        flash('Your password has been changed, you need to login to continue', 'info')
+        logout_user()
+        return redirect(url_for('authentication_pages.login'))
+
+    return render_template('authentication/change_password.html', form=form)
 
 
 @authentication_pages.route('/logout', strict_slashes=False)

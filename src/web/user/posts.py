@@ -1,13 +1,12 @@
 #!/usr/bin/python3
 """ Starts a Flash Web Application """
+import markdown
 from flask import render_template, Blueprint, flash, redirect, url_for, request
 from flask_login import current_user, login_required
-import markdown
 from sqlalchemy import desc, text, or_
 
 from src import db
 from src.models.post import Post
-from src.models.tag import Tag
 from src.web.user.forms import PostForm
 
 posts_pages = Blueprint('posts_pages', __name__,
