@@ -7,6 +7,7 @@ from src import db
 from src.models.post import Post
 from src.web.user.forms import PostForm
 
+# Create blueprint for managing user posts
 manage_posts_pages = Blueprint('manage_posts_pages', __name__,
                                template_folder='templates',
                                url_prefix='/manage-posts')
@@ -15,6 +16,9 @@ manage_posts_pages = Blueprint('manage_posts_pages', __name__,
 @manage_posts_pages.route('/', strict_slashes=False, methods=['GET', 'POST'])
 @login_required
 def index():
+    """
+    Defines the method that lists existing posts
+    """
     # Get the current page from request query parameter
     # set 1 as the default page number
     page = request.args.get('page', 1, type=int)
@@ -30,6 +34,12 @@ def index():
                           methods=['GET', 'POST'])
 @login_required
 def edit(post_id):
+    """
+    Defines the method that edits an existing post
+
+    Args:
+        post_id (String): The id of the post to edit
+    """
     # Query the selected post for editing in the database by the given Id
     query = db.session.query(Post).filter(Post.id == post_id)
 
@@ -70,6 +80,12 @@ def edit(post_id):
                           methods=['GET'])
 @login_required
 def delete(post_id):
+    """
+    Defines the method that edits an existing post
+
+    Args:
+        post_id (String): The id of the post to delete
+    """
     # Query the selected post for deleting in the database by the given Id
     query = db.session.query(Post).filter(Post.id == post_id)
 

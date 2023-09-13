@@ -7,6 +7,7 @@ from src import db
 from src.models.tag import Tag
 from src.web.admin.forms import TagForm
 
+# Create blueprint for managing tags
 manage_tags_pages = Blueprint('manage_tags_pages', __name__,
                               template_folder='templates',
                               url_prefix='/manage-tags')
@@ -15,6 +16,8 @@ manage_tags_pages = Blueprint('manage_tags_pages', __name__,
 @manage_tags_pages.route('/', strict_slashes=False, methods=['GET', 'POST'])
 @login_required
 def index():
+    """ Defines the method that lists all tags """
+
     # Get the current page from request query parameter
     # set 1 as the default page number
     page = request.args.get('page', 1, type=int)
@@ -30,6 +33,7 @@ def index():
                          methods=['GET', 'POST'])
 @login_required
 def add():
+    """ Defines the method that adds tags """
     # Initialize the tag management form
     form = TagForm()
 
@@ -53,6 +57,13 @@ def add():
                          methods=['GET', 'POST'])
 @login_required
 def edit(tag_id):
+    """
+    Defines the method that edits an existing tag
+
+    Args:
+        tag_id (String): The id of the tag to edit
+    """
+
     # Query the selected tag for editing in the database by the given Id
     query = db.session.query(Tag).filter(Tag.id == tag_id)
 
@@ -85,6 +96,13 @@ def edit(tag_id):
                          methods=['GET'])
 @login_required
 def delete(tag_id):
+    """
+    Defines the method that deletes an existing tag
+
+    Args:
+        tag_id (String): The id of the tag to delete
+    """
+
     # Query the selected tag for deleting in the database by the given Id
     query = db.session.query(Tag).filter(Tag.id == tag_id)
 

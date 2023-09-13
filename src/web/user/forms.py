@@ -1,10 +1,9 @@
-""" Defines a module containing front-end user forms """
+""" Defines a module containing user forms """
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField, BooleanField, \
     validators
 from wtforms.validators import Length
 from wtforms_sqlalchemy.fields import QuerySelectMultipleField
-
 from src import db
 from src.models.tag import Tag
 

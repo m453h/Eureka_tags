@@ -8,6 +8,7 @@ from src import db
 from src.models.user import User
 from src.web.admin.forms import UserForm
 
+# Create blueprint for managing user posts
 manage_users_pages = Blueprint('manage_users_pages', __name__,
                                template_folder='templates',
                                url_prefix='/manage-users')
@@ -16,6 +17,7 @@ manage_users_pages = Blueprint('manage_users_pages', __name__,
 @manage_users_pages.route('/', strict_slashes=False, methods=['GET', 'POST'])
 @login_required
 def index():
+    """ Defines the method that lists all user accounts """
     # Get the current page from request query parameter
     # set 1 as the default page number
     page = request.args.get('page', 1, type=int)
@@ -31,6 +33,13 @@ def index():
                           methods=['GET', 'POST'])
 @login_required
 def edit(user_id):
+    """
+    Defines the method for editing user accounts
+
+    Args:
+        user_id (string): The id of the user account to edit
+    """
+
     # Query the selected user for editing in the database by the given Id
     query = db.session.query(User).filter(User.id == user_id)
 
@@ -68,6 +77,13 @@ def edit(user_id):
                           methods=['GET'])
 @login_required
 def delete(user_id):
+    """
+    Defines the method for deleting user accounts
+
+    Args:
+        user_id (string): The id of the user account to delete
+    """
+    # Query for the User that matches the supplied user_id
     query = db.session.query(User).filter(User.id == user_id)
     user = query.first()
 
@@ -100,6 +116,13 @@ def delete(user_id):
                           methods=['GET'])
 @login_required
 def block(user_id):
+    """
+    Defines the method for blocking user accounts
+
+    Args:
+        user_id (string): The id of the user account to block
+    """
+
     query = db.session.query(User).filter(User.id == user_id)
     user = query.first()
 
@@ -128,6 +151,12 @@ def block(user_id):
                           methods=['GET'])
 @login_required
 def unblock(user_id):
+    """
+    Defines the method for unblocking user accounts
+
+    Args:
+        user_id (string): The id of the user account to unblock
+    """
     q = db.session.query(User).filter(User.id == user_id)
     user = q.first()
 
