@@ -1,14 +1,25 @@
 <p align="center">
   <a href="https://m453h.tech">
     <picture>
-      <source height="125" media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/m453h/Eureka_tags/master/media/app_logo.png">
-      <img height="125" alt="Eureka Tags" src="https://raw.githubusercontent.com/m453h/Eureka_tags/master/media/app_logo.png">
+      <source  media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/m453h/Eureka_tags/master/media/app_logo.png">
+      <img alt="Eureka Tags" src="https://raw.githubusercontent.com/m453h/Eureka_tags/master/media/app_logo.png">
     </picture>
   </a>
   <br>
 </p>
 
-## Eureka Tags
+## Table of Contents
+- [Introduction](#introduction)
+- [Installation](#installation)
+    * [Downloading and installing steps](#downloading-and-installing-steps:)
+- [Usage](#usage)
+- [Contributing](#contributing)
+   * [How to contribute](#how-to-contribute)
+   * [Code Style](#code-style)
+- [Related Projects](#related-projects)
+- [Licensing](#licensing)
+
+## Introduction
 Eureka Tags is a web-based application that aims to help individuals in various tech-related domains document and organize solutions to various problems they’ve encountered.
 
 ## Installation
@@ -55,8 +66,8 @@ After the initial setup, you can access the application via your preferred
 browser. Given that everything is set up correctly, you should see the following page:
 <p align="center">
     <picture>
-      <source height="500" media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/m453h/Eureka_tags/master/media/application_home_page.png">
-      <img height="500" alt="Eureka Tags" src="https://raw.githubusercontent.com/m453h/Eureka_tags/master/media/application_home_page.png">
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/m453h/Eureka_tags/master/media/application_home_page.png">
+      <img alt="Eureka Tags" src="https://raw.githubusercontent.com/m453h/Eureka_tags/master/media/application_home_page.png">
     </picture>
   <br>
 </p>
@@ -68,8 +79,8 @@ Eureka tags allows you to write down the solution to your problem by using Markd
 When creating a post about a solution you can choose whether it should be visible to only you or to other users of the application. Eureka tags also allows you to categorize your solutions under a specific tag which could be a programming language, tool or topic.
 <p align="center">
     <picture>
-      <source height="500" media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/m453h/Eureka_tags/master/media/application_create_post.png">
-      <img height="500" alt="Eureka Tags" src="https://raw.githubusercontent.com/m453h/Eureka_tags/master/media/application_create_post.png">
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/m453h/Eureka_tags/master/media/application_create_post.png">
+      <img alt="Eureka Tags" src="https://raw.githubusercontent.com/m453h/Eureka_tags/master/media/application_create_post.png">
     </picture>
   <br>
 </p>
@@ -79,8 +90,8 @@ Eureka tags features an easy-to-use search bar that is always visible when you a
 You can also browse for all solutions categorized under a certain tag by simply clicking a tag.
 <p align="center">
     <picture>
-      <source height="500" media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/m453h/Eureka_tags/master/media/application_dashboard.png">
-      <img height="500" alt="Eureka Tags" src="https://raw.githubusercontent.com/m453h/Eureka_tags/master/media/application_dashboard.png">
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/m453h/Eureka_tags/master/media/application_dashboard.png">
+      <img alt="Eureka Tags" src="https://raw.githubusercontent.com/m453h/Eureka_tags/master/media/application_dashboard.png">
     </picture>
   <br>
 </p>
