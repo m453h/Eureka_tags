@@ -7,10 +7,10 @@
   </a>
   <br>
 </p>
+
 ![Static Badge](https://img.shields.io/badge/Tested%20with-Python%203.8-yellow)
 ![Static Badge](https://img.shields.io/badge/Tested%20with-MySQL%208.0.34-blue)
 ![Static Badge](https://img.shields.io/badge/Tested%20with-Ubuntu%2020.04-orange)
-
 
 ## Table of Contents
 - [Introduction](#-introduction)
