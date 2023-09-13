@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="bg-gray">
+    <div class="container">
+        <div class="row">
+            {% include "components/side_bar.html" %}
+            <div class="col-lg-9 col-md-8 mb-5" style="min-height:1000px;">
+                <div class="card col-lg-12 border-0 shadow-sm mt-4">
+                    <div class="card-header border-0">
+                        Existing Users
+                    </div>
+                    <div class="card-body">
+                        {% include "components/flash_message.html" %}
+
+                         <table class="data-grid">
+                             <thead>
+                                <tr>
+                                 <th class="number"><span>S/N</span></th>
+                                 <th><span>Username</span></th>
+                                 <th><span>Full Name</span></th>
+                                 <th><span>Role</span></th>
+                                 <th><span>Account Status</span></th>
+                                 <th><span>Action</span></th>
+                                </tr>
+                             </thead>
+                                <tbody>
+                                    {% for user in users.items %}
+                                    <tr  class="odd">
+                                        <td>{{ loop.index + (users.page - 1) * users.per_page }}.</td>
+                                        <td>{{ user.email }}</td>
+                                        <td>{{ user.full_name }}</td>
+                                        <td>{{ user.current_role }}</td>
+                                        <td class="text-center" style="font-size:1.2em;">
+                                            {% if user.account_status == 'A' %}
+                                                <span class="badge lg rounded-pill bg-success">Active</span>
+                                            {% elif user.account_status == 'I' %}
+                                                <span class="badge lg rounded-pill bg-warning">Inactive</span>
+                                            {% elif user.account_status == 'B' %}
+                                                <span class="badge lg rounded-pill bg-danger">Blocked</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="action text-center" style="width:200px">
+                                            <a href="{{ url_for('manage_users_pages.edit', user_id=user.id) }}" class="btn btn-warning text-white mb-2" title="Click to edit record"><i class="fa fa-pencil"></i></a>
+                                            <a href="{{ url_for('manage_users_pages.delete', user_id=user.id) }}" class="btn btn-danger delete-btn mb-2" title="Click to delete record" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa fa-trash"></i></a>
+                                            {% if user.account_status == 'A' %}
+                                                <a href="{{ url_for('manage_users_pages.block', user_id=user.id) }}" class="btn btn-dark mb-2" title="Click to block user account"><i class="fa-solid fa-user-slash"></i></a>
+                                            {% elif user.account_status == 'B' %}
+                                                <a href="{{ url_for('manage_users_pages.unblock', user_id=user.id) }}" class="btn btn-primary mb-2" title="Click to unblock user account"><i class="fa-solid fa-user-check"></i></a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                         </table>
+
+                        <div class="pagination-list mt-3">
+                            <ul class="pagination">
+                                {% if users.has_prev %}
+                                    <li class="page-item"><a class="page-link" href="{{ url_for('manage_users_pages.index', page=users.prev_num, q=request.args.get('q')) }}" rel="next">Previous</a></li>
+                                {% else %}
+                                    <li class="page-item  disabled"><span class="page-link">Previous</span></li>
+                                {% endif %}
+                                 {% for page_num in users.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                                   {% if page_num %}
+                                        {%if users.page == page_num %}
+                                            <li class="page-item active">
+                                        {% else %}
+                                           <li class="page-item">
+                                        {% endif %}
+                                            <a class="page-link" href="{{ url_for('manage_users_pages.index', page=page_num, q=request.args.get('q')) }}">{{ page_num }}</a></li>
+                                   {% else %}
+                                        ...
+                                   {% endif %}
+                                {% endfor %}
+                                {% if users.has_next %}
+                                    <li class="page-item"><a class="page-link" href="{{ url_for('manage_users_pages.index', page=users.next_num, q=request.args.get('q')) }}" rel="next">Next</a></li>
+                                {% else %}
+                                    <li class="page-item disabled"><span class="page-link">Next</span></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include "components/delete_modal.html" %}
+{% endblock %}

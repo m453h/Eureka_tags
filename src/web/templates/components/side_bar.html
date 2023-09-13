@@ -30,7 +30,7 @@
                          {% if current_user.current_role == "Admin" %}
                             <li><a href="{{ url_for('manage_tags_pages.index') }}"><span class="icon-spacer-right"><i class="fa-solid fa-tags"></i></span>Manage Tags</a></li>
                             <li><a href="{{ url_for('manage_posts_pages.index') }}"><span class="icon-spacer-right"><i class="fa-solid fa-book"></i></span>Manage Posts</a></li>
-                            <li><a href="{{ url_for('dashboard_pages.index') }}"><span class="icon-spacer-right"><i class="fa-solid fa-users"></i></span>Manage Users</a></li>
+                            <li><a href="{{ url_for('manage_users_pages.index') }}"><span class="icon-spacer-right"><i class="fa-solid fa-users"></i></span>Manage Users</a></li>
                          {% endif %}
 
                         <li><a href="{{ url_for('authentication_pages.change_password') }}"><span class="icon-spacer-right"><i class="fa-solid fa-lock"></i></span>Change Password</a></li>
