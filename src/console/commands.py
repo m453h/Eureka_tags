@@ -1,11 +1,11 @@
 import os
-
 import typer
 import pymysql
 from flask import Flask
 from flask_bcrypt import Bcrypt
 from pymysql import IntegrityError
 
+# Initial configuration for the database connection
 db_config = {
     'host': 'localhost',
     'user': os.getenv('EUREKA_DB_USER'),
@@ -14,12 +14,14 @@ db_config = {
     'cursorclass': pymysql.cursors.DictCursor
 }
 
+# Initialize the database and command line application
 db = pymysql.connect(**db_config)
 cmd = typer.Typer()
 
 
 @cmd.command()
 def create_admin_account():
+    """ Defines the method for creating a new admin account """
     # Fetch admin role id that will be used to create the account
     role_id = fetch_admin_role_id()
 
@@ -53,6 +55,7 @@ def create_admin_account():
 
 @cmd.command()
 def initialize_roles():
+    """ Defines the method for initializing user roles """
     # Check if the current state of the database contains any roles
     # if it does then notify the user that the action will not be done
     if fetch_current_roles():
@@ -65,6 +68,7 @@ def initialize_roles():
 
 
 def fetch_current_roles():
+    """ Defines the method for fetching current user roles in the database """
     try:
         with db.cursor() as cursor:
             # The SQL query to fetch all the existing roles in the database
@@ -84,6 +88,7 @@ def fetch_current_roles():
 
 
 def fetch_admin_role_id():
+    """ Defines the method for fetching the Admin role Id """
     try:
         with db.cursor() as cursor:
             # The SQL query to fetch the Admin role ID from the database
@@ -99,10 +104,15 @@ def fetch_admin_role_id():
             return result.get('id')
     finally:
         pass
-    return False
 
 
 def insert_default_roles(description):
+    """
+        Defines the method for adding a user role to the database
+
+        Args:
+            description (String): The name of the role to add to the database
+    """
     try:
         with db.cursor() as cursor:
             # Create an SQL query for inserting a new role
@@ -120,6 +130,16 @@ def insert_default_roles(description):
 
 
 def add_admin_account(email, full_name, account_status, password, role_id):
+    """
+        Defines the method for adding an admin account to the database
+
+        Args:
+            email (String): The e-mail (username) of the administrator
+            full_name (String): The full name of the administrator
+            account_status (String): The status of the admin user account
+            password (String): The password for the admin user account
+            role_id (String): The id of the admin user role
+    """
     try:
         with db.cursor() as cursor:
             # Create an SQL query for inserting a new user account
