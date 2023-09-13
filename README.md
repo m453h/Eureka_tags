@@ -1,8 +1,8 @@
 <p align="center">
   <a href="https://gofiber.io">
     <picture>
-      <source height="125" media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/m453h/Eureka_tags/master/src/static/images/app_logo_alt.png">
-      <img height="125" alt="Eureka Tags" src="https://raw.githubusercontent.com/m453h/Eureka_tags/master/src/static/images/app_logo_alt.png">
+      <source height="125" media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/m453h/Eureka_tags/master/media/app_logo.png">
+      <img height="125" alt="Eureka Tags" src="https://raw.githubusercontent.com/m453h/Eureka_tags/master/media/app_logo.png">
     </picture>
   </a>
   <br>
@@ -50,6 +50,10 @@ Eureka Tags is a web-based application that aims to help individuals in various 
     gunicorn --bind 0.0.0.0:5000 src.app:app
    </pre>
 ## Usage
+You can run Eureka Tags in your local machine or through your preferred host.
+After the initial setup, you can access the application via your preferred
+browser and create 
+
 ## Contributing
 ## Related projects
 ## Licensing
