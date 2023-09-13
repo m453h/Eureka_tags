@@ -80,7 +80,7 @@ def delete(post_id):
     if post:
         post.tags.clear()  # Remove all tags related with the post
         db.session.delete(post)  # Remove the post
-        db.session.commit() # Commit changes to the database
+        db.session.commit()  # Commit changes to the database
 
         # Add a flash message and redirect user to the list of posts
         flash('The post has been removed !', 'success')
