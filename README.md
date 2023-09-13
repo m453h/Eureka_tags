@@ -7,23 +7,43 @@
   </a>
   <br>
 </p>
+![Static Badge](https://img.shields.io/badge/Tested%20with-Python%203.8-yellow)
+![Static Badge](https://img.shields.io/badge/Tested%20with-MySQL%208.0.34-blue)
+![Static Badge](https://img.shields.io/badge/Tested%20with-Ubuntu%2020.04-orange)
+
 
 ## Table of Contents
-- [Introduction](#introduction)
-- [Installation](#installation)
-    * [Downloading and installing steps](#downloading-and-installing-steps:)
-- [Usage](#usage)
-- [Contributing](#contributing)
-   * [How to contribute](#how-to-contribute)
-   * [Code Style](#code-style)
-- [Related Projects](#related-projects)
-- [Licensing](#licensing)
+- [Introduction](#-introduction)
+   * [Demo](#-demo)
+   * [Project Team](#-project-team)
+   * [Motivation](#-motivation)
+   * [Blog Post](#-blog-post)
+- [Installation](#-installation)
+    * [Downloading and installing steps](#-downloading-and-installing-steps)
+- [Usage](#-usage)
+- [Contributing](#-contributing)
+   * [How to contribute](#-how-to-contribute)
+   * [Code Style](#-code-style)
+- [Related Projects](#-related-projects)
+- [Built with](#-built-with)
+- [Licensing](#-licensing)
 
-## Introduction
-Eureka Tags is a web-based application that aims to help individuals in various tech-related domains document and organize solutions to various problems they’ve encountered.
+##  🏁 Introduction
+Eureka Tags is a web-based application that enables students and professionals in various tech-related fields such as software developers, DevOps engineers, system administrators, and data scientists,  to document and organize solutions to technical problems they’ve encountered. The application provides a concise way to document and organize solutions to these problems so that whenever such a problem is encountered again there would be a central knowledge repository that can be used to retrieve the correct solution, thus saving precious time and increasing productivity.  This application was developed as part of the portfolio project for the Foundations ALX Software Engineering program
 
-## Installation
-### Downloading and installing steps:
+### 🚀 Demo
+To see Eureka Tags in action click the following [link](http://m453h.tech) and create your account.
+### 🤝 Project Team
+This project has been developed by Michael Hudson Nkotagu, Connect with the developer via [Github](https://github.com/m453h), [Linked](ww.linkedin.com/in/michael-hudson-nkotagu).
+
+### 💪 Motivation
+The motivation for this project stems from the hard lessons I’ve learned through using computers for more than half of my life. Over the course of time, I have come to accept the fact that with computers things can go wrong and they usually go wrong very fast. I remember when I was a kid, my brother and I would spend countless hours trying to install our favourite PC games. We were always learning new things, but we also made some mistakes that resulted in infecting our home computer with viruses or corrupting our files. Having little knowledge about computers and limited internet access we’d often write down in our exercise books the steps we used to solve the numerous problems we encountered and the mistakes that we made so that we’d avoid repeating them the next time.   Similarly, as I started to learn and work with different programming languages I’ve often found myself writing down different solutions to my problems in different places such as notes application, sending myself an e-mail with a description of a solution, and bookmarking pages with different solutions.  The fundamental with this approach in which information is scattered across multiple applications and devices is the fact I’ve often found it difficult to search for the solution I need when I face a problem I suspect I’ve already solved. This problem became more evident as I was learning a lot of new concepts within a short span of time in the ALX Software Engineering programme. Therefore I concluded that things should be better, I should not only find a way to store the solutions to various technical problems I’ve encountered but also easily retrieve them whenever needed. Thus, when it was time to work on my portfolio project it was a foregone conclusion that I would develop Eureka Tags, I believe that this project will help many people working or learning about different tech stacks document numerous solutions to different problems they'll encounter in the exciting journey and consequently boost their productivity by making their documented solutions easy to retrieve whenever they need to refer back to them.
+
+### 📘 Blog Post
+To read more about this project click the following [link](https://medium.com/@m453h/difficult-takes-a-day-impossible-takes-a-week-or-two-how-i-developed-eureka-tags-in-two-weeks-8d1be07fc8d4).
+
+## 🔧 Installation
+### ⬇️ Downloading and installing steps:
 1. Make sure you have Python 3.8 or above and pip (version 23.2.1 or above) and MySQL (version 8.0.34 or above) installed and clone the project repository
    <pre>
    git clone git@github.com:m453h/Eureka_tags.git
@@ -60,7 +80,7 @@ Eureka Tags is a web-based application that aims to help individuals in various 
     <pre>
     gunicorn --bind 0.0.0.0:5000 src.app:app
    </pre>
-## Usage
+## 🤔 Usage
 You can run Eureka Tags in your local machine or through your preferred host.
 After the initial setup, you can access the application via your preferred
 browser. Given that everything is set up correctly, you should see the following page:
@@ -98,11 +118,11 @@ You can also browse for all solutions categorized under a certain tag by simply 
 
 **3. Edit or delete a post about a solution:** Eureka tags allows you to edit or delete a post you've made documenting a solution to a problem. If you've made a mistake, you don't have to worry you can quickly rectify it.
 
-## Contributing
+## ✅ Contributing
 We welcome contributions to improve Eureka Tags! Whether you want to report a bug, request a feature, or submit a pull request with code changes, 
 please follow the guidelines outlined below.
 
-### How to contribute
+### 🔄 How to contribute
 1. Fork the Repository: Click on the "Fork" button at the top-right corner of the repository's page. This will create a copy of the repository in your GitHub account.
 
 2. Clone the Repository: Clone the forked repository to your local machine using git clone. 
@@ -116,12 +136,29 @@ please follow the guidelines outlined below.
 6. Push Changes: Push your changes to your forked repository on GitHub.
 7. Submit a Pull Request: Go to the Eureka Tag's main repository's page on GitHub and click on the "New Pull Request" button. Provide a clear title and description for your pull request, explaining the purpose and changes made.
 
-### Code Style
+### 🕺 Code Style
 1. This project uses the pycodestyle (version 2.8.*) coding convention
 2. Write clear, concise, and well-documented code. Include comments and docstrings to explain your code's functionality.
 
 
-## Related projects
+## 🥂 Related Projects
 The following project relate to Eureka Tags: [Larder](https://larder.io/), [Codever](https://www.codever.dev/), and [CarryLinks](https://carrylinks.com/).
-## Licensing
+
+## 🛠️ Built With
+Technologies used in this project include:
+   * Flask
+   * Bootstrap 5
+   * Markdown
+   * MySQL
+   * JavaScript
+   * jQuery
+   * HTML5
+   * CSS3
+   * Font Awesome
+   * eCharts
+   * SimpleMDE
+   * Select2
+
+For the list of Python dependencies see the [requirements.txt](https://github.com/m453h/Eureka_tags/blob/master/requirements.txt) file.
+## ⚖️ Licensing
 This project is under the MIT License. See the [LICENSE](https://raw.githubusercontent.com/m453h/Eureka_tags/master/LICENSE.txt) file for the full license text.
