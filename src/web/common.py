@@ -7,8 +7,7 @@ import markdown
 from flask import render_template, Blueprint, redirect, url_for
 from flask_login import current_user
 
-from src import app, db
-from src.models.post import Post
+from src import app
 
 common_pages = Blueprint('common_pages', __name__,
                          template_folder='templates')
@@ -29,7 +28,8 @@ def inject_now():
 
 def sanitize_html(value):
     allowed_tags = {'pre', 'code', 'p', 'strong', 'em', 'h1', 'a',
-                    'abbr', 'acronym', 'b', 'blockquote', 'li', 'strong', 'ul', 'br', 'hr'}
+                    'abbr', 'acronym', 'b', 'blockquote', 'li', 'strong',
+                    'ul', 'br', 'hr'}
     allowed_attributes = {
         '*': ['class'],
         'a': ['href', 'rel', 'title'],
