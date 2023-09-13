@@ -21,7 +21,6 @@ manage_tags_pages = Blueprint('manage_tags_pages', __name__,
 def index():
     page = request.args.get('page', 1, type=int)
     tags = Tag.query.paginate(page=page, per_page=10)
-    print(tags.items)
     return render_template('manage_tags_pages/index.html', tags=tags)
 
 
