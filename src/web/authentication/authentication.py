@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """ Defines a module for authentication of user accounts """
+import os
+
 from flask import render_template, Blueprint, flash, redirect, url_for
 from src.models.user import User
 from src import db, bcrypt, login_manager, mail, app
@@ -11,6 +13,9 @@ from flask_mail import Message
 
 authentication_pages = Blueprint('authentication_pages', __name__,
                                  template_folder='templates')
+
+# Get the configured site domain name
+domain_name = os.environ.get('DOMAIN_NAME')
 
 
 def send_reset_email(user):
@@ -27,13 +32,12 @@ def send_reset_email(user):
     # Construct the email message object
     msg = Message('Password Reset Request', sender=app.config['MAIL_USERNAME'],
                   recipients=[user.email])
-
+    reset_link = domain_name + url_for('authentication_pages.reset_token',
+                                       token=token)
     # Define the e-mail message body
     html_body = render_template('authentication/password_reset_email.html',
                                 recipient_name=user.full_name,
-                                reset_link=url_for('authentication\
-                                _pages.reset_token', token=token,
-                                                   _external=True)
+                                reset_link=reset_link
                                 )
     msg.html = html_body
 
@@ -55,13 +59,13 @@ def send_activation_email(user):
     # Construct the email message object
     msg = Message('Account Activation', sender=app.config['MAIL_USERNAME'],
                   recipients=[user.email])
-
+    activation_link = domain_name + url_for('authentication_pages'
+                                            '.activation_token',
+                                            token=token)
     # Construct the message body
     html_body = render_template('authentication/activation_email.html',
                                 recipient_name=user.full_name,
-                                activation_link=url_for('authentication_\
-                                pages.activation_token', token=token,
-                                                        _external=True))
+                                activation_link=activation_link)
     msg.html = html_body
 
     # Send the e-mail
@@ -123,7 +127,7 @@ def register():
     # Check if the submitted form has valid data
     if form.validate_on_submit():
         # Hash the current password using bcrypt
-        hashed_password = bcrypt.generate_password_hash(form.password.data)\
+        hashed_password = bcrypt.generate_password_hash(form.password.data) \
             .decode('utf-8')
         # Create the instance of the user account
         user = User(email=form.email.data,
@@ -206,7 +210,7 @@ def reset_token(token):
     # If the form is valid then proceed with password reset actions
     if form.validate_on_submit():
         # Hash the new supplied password
-        hashed_password = bcrypt.generate_password_hash(form.password.data)\
+        hashed_password = bcrypt.generate_password_hash(form.password.data) \
             .decode('utf-8')
 
         # Update the user password and reset the password request status
@@ -275,7 +279,7 @@ def change_password():
     if form.validate_on_submit():
         # Set the current user's password hash to the hash of the supplied
         # new password and commit the changes to the database
-        current_user.password = bcrypt\
+        current_user.password = bcrypt \
             .generate_password_hash(form.password.data).decode('utf-8')
         db.session.commit()
 
