@@ -141,7 +141,7 @@ please follow the guidelines outlined below.
 1. This project uses the pycodestyle (version 2.8.*) coding convention
 2. Write clear, concise, and well-documented code. Include comments and docstrings to explain your code's functionality.
 
-### The application data model
+### 💾 The application data model
 The application features a concise data model, as shown below
 <p align="center">
     <picture>
