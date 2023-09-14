@@ -24,6 +24,7 @@
 - [Contributing](#-contributing)
    * [How to contribute](#-how-to-contribute)
    * [Code Style](#-code-style)
+   * [The application data model](#the-application-data-model)
 - [Related Projects](#-related-projects)
 - [Built with](#-built-with)
 - [Licensing](#-licensing)
@@ -139,6 +140,43 @@ please follow the guidelines outlined below.
 ### 🕺 Code Style
 1. This project uses the pycodestyle (version 2.8.*) coding convention
 2. Write clear, concise, and well-documented code. Include comments and docstrings to explain your code's functionality.
+
+### The application data model
+The application features a concise data model, as shown below
+<p align="center">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://github.com/m453h/Eureka_tags/blob/master/media/application_data_model.png?raw=true">
+      <img alt="Eureka Tags" src="https://github.com/m453h/Eureka_tags/blob/master/media/application_data_model.png?raw=true">
+    </picture>
+  <br>
+</p>
+
+All queries are written using SQLAlchemy, some key queries used in the application include the following
+- Searching for a post:
+   <pre>
+          posts_query = Post.query. \
+           filter_by(user_id=current_user.id) \
+           .filter(
+             or_(
+               text("title LIKE :content"),
+               text("content LIKE :content")
+             )
+           ) \
+           .params(content=f"%{search_content}%") \
+           .order_by(desc(Post.date_created))
+   </pre>
+- Viewing details of a post:
+   <pre>
+  query = db.session.query(Post).filter(Post.id == post_id)
+  </pre>
+
+- Retrieving a summary of the number of user posts by date
+  <pre>
+  query = db.session.query(
+      func.count(Post.id).label('total'),
+      func.date(Post.date_created).label('date_created')
+  ).group_by(func.date(Post.date_created)).order_by(func.date(Post.date_created).desc())
+</pre>
 
 
 ## 🥂 Related Projects
