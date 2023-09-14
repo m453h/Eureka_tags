@@ -62,6 +62,7 @@ To read more about this project click the following [link](https://medium.com/@m
      - EMAIL_USER: The user account of the email used by the application to send notifications 
      - EMAIL_PASSWORD: The password of the email used by the application to send notifications
      - SECRET_KEY: This is a key that is used for securely signing the session cookie and other security related needs of the application
+     - DOMAIN_NAME: The domain name of the application used during generating links sent to external users e.g. Account activation and password reset e-mail(s)
 4. Make sure your database is set up correctly, change to the project sources directory (src) and run the ```flask db upgrade``` command to create the tables used by the application
     <pre>
     cd [PROJECT_DIRECTORY>]/src
