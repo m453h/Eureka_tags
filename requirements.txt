@@ -33,6 +33,6 @@ urllib3==2.2.2
 Werkzeug==3.0.3
 WTForms==3.0.1
 WTForms-SQLAlchemy==0.3
-zipp==3.16.2
+zipp==3.19.1
 bleach~=6.0.0
 typer~=0.9.0
