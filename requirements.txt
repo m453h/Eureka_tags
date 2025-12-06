@@ -29,7 +29,7 @@ PyMySQL==1.1.1
 requests==2.32.4
 SQLAlchemy==2.0.20
 typing_extensions==4.7.1
-urllib3==2.5.0
+urllib3==2.6.0
 Werkzeug==3.0.6
 WTForms==3.0.1
 WTForms-SQLAlchemy==0.3
